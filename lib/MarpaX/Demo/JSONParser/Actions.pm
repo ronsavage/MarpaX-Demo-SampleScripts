@@ -163,11 +163,9 @@ See L<MarpaX::Demo::JSONParser/Description>.
 
 See L<MarpaX::Demo::JSONParser/Installation>.
 
-=head1 Constructor and Initialization
-
-The constructor is called automatically by L<Marpa::R2> as appropriate.
-
 =head1 Methods
+
+The functions are called automatically by L<Marpa::R2> as appropriate.
 
 =head2 new()
 
