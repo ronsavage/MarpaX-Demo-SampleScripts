@@ -1,5 +1,5 @@
 ---
-abstract: 'A Marpa-based parser for JSON files'
+abstract: 'A JSON parser with a choice of grammars'
 author:
   - 'Ron Savage <ron@savage.net.au>'
 build_requires:
@@ -13,17 +13,21 @@ license: artistic_2
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
-name: MarpaX-Demo-JSON_1
+name: MarpaX-Demo-JSONParser
 provides:
-  MarpaX::Demo::JSON_1:
-    file: lib/MarpaX/Demo/JSON_1.pm
+  MarpaX::Demo::JSONParser:
+    file: lib/MarpaX/Demo/JSONParser.pm
     version: 1
-  MarpaX::Demo::JSON_1::Actions:
-    file: lib/MarpaX/Demo/JSON_1/Actions.pm
+  MarpaX::Demo::JSONParser::Actions:
+    file: lib/MarpaX/Demo/JSONParser/Actions.pm
     version: 1
 requires:
+  File::Basename: 2.82
   Marpa::R2: 2.058
   Moo: 1.002
+  Path::Tiny: 0.025
+  Perl6::Slurp: 0.051003
+  Try::Tiny: 0.16
   strict: 0
   warnings: 0
 resources:
