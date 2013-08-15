@@ -21,6 +21,14 @@ has base_name =>
 	required => 0,
 );
 
+has bnf_file =>
+(
+	default  => sub {return ''},
+	is       => 'rw',
+#	isa      => 'Str',
+	required => 1,
+);
+
 has grammar =>
 (
 	default  => sub {return ''},
@@ -37,24 +45,16 @@ has scanner =>
 	required => 0,
 );
 
-has user_bnf_file =>
-(
-	default  => sub {return ''},
-	is       => 'rw',
-#	isa      => 'Str',
-	required => 1,
-);
-
 our $VERSION = '1.00';
 
 # ------------------------------------------------
 
 sub BUILD
 {
-	my($self)    = @_;
-	my $user_bnf = slurp $self -> user_bnf_file, {utf8 => 1};
+	my($self) = @_;
+	my $bnf   = slurp $self -> user_file, {utf8 => 1};
 
-	$self -> base_name(basename($self -> user_bnf_file) );
+	$self -> base_name(basename($self -> bnf_file) );
 
 	if ($self -> base_name eq 'json.1.bnf')
 	{
@@ -64,7 +64,7 @@ sub BUILD
 			({
 				action_object  => 'MarpaX::Demo::JSONParser::Actions',
 				default_action => 'do_first_arg',
-				source         => \$user_bnf,
+				source         => \$bnf,
 			})
 		)
 	}
@@ -75,7 +75,7 @@ sub BUILD
 			Marpa::R2::Scanless::G -> new
 			({
 				bless_package => 'MarpaX::Demo::JSONParser::Actions',
-				source        => \$user_bnf,
+				source        => \$bnf,
 			})
 		)
 	}
@@ -181,7 +181,7 @@ C<MarpaX::Demo::JSONParser> - A JSON parser with a choice of grammars
 
 	use Try::Tiny;
 
-	my($user_bnf) = 'data/json.1.bnf'; # Or data/json.2.bnf.
+	my($bnf_file) = 'data/json.1.bnf'; # Or data/json.2.bnf.
 	my($string)   = 'My data';
 
 	my($result);
@@ -190,7 +190,7 @@ C<MarpaX::Demo::JSONParser> - A JSON parser with a choice of grammars
 
 	try
 	{
-		$result = MarpaX::Demo::JSONParser -> new(user_bnf_file => $user_bnf) -> parse($string);
+		$result = MarpaX::Demo::JSONParser -> new(bnf_file => $bnf_file) -> parse($string);
 	};
 
 	# $result is undef, or what you hope for.
@@ -201,7 +201,7 @@ See t/basic.tests.t for sample code.
 
 C<MarpaX::Demo::JSONParser> demonstrates 2 grammars for parsing JSON.
 
-Only 1 grammar is loaded per run, as specified by the C<user_bnf_file> option to C<< new() >>.
+Only 1 grammar is loaded per run, as specified by the C<bnf_file> option to C<< new() >>.
 
 See t/basic.tests.t for sample code.
 
@@ -238,11 +238,11 @@ C<new()> is called as C<< my($parser) = MarpaX::Demo::JSONParser -> new(k1 => v1
 It returns a new object of type C<MarpaX::Demo::JSONParser>.
 
 Key-value pairs accepted in the parameter list (see corresponding methods for details
-[e.g. user_bnf_file([$string])]):
+[e.g. bnf_file([$string])]):
 
 =over 4
 
-=item o user_bnf_file aUserGrammarFileName
+=item o bnf_file aUserGrammarFileName
 
 Specify the name of the file containing your Marpa::R2-style grammar.
 
@@ -258,7 +258,7 @@ Default: ''.
 
 =head2 parse($string)
 
-Parses the given $string using the grammar whose file name was provided by the C<user_bnf_file> option to
+Parses the given $string using the grammar whose file name was provided by the C<bnf_file> option to
 C<< new() >>.
 
 Dies if the parse fails, or returns the result of the parse if it succeeded.
