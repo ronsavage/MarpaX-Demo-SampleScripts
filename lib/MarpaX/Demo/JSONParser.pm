@@ -74,8 +74,8 @@ sub BUILD
 		(
 			Marpa::R2::Scanless::G -> new
 			({
-				action_object  => 'MarpaX::Demo::JSONParser::Actions',
-				source         => \$user_bnf,
+				bless_package => 'MarpaX::Demo::JSONParser::Actions',
+				source        => \$user_bnf,
 			})
 		)
 	}
@@ -120,23 +120,24 @@ sub eval_json
 {
 	my ($self, $thing) = @_;
 	my $type = ref $thing;
+
 	if ( $type eq 'REF' ) {
 		return \$self -> eval_json( ${$thing} );
 	}
 	if ( $type eq 'ARRAY' ) {
 		return [ map { $self -> eval_json($_) } @{$thing} ];
 	}
-	if ( $type eq 'My_Nodes::string' ) {
+	if ( $type eq 'MarpaX::Demo::JSONParser::Actions::string' ) {
 		my $string = substr $thing->[0], 1, -1;
 		return $self -> decode_string($string) if ( index $string, '\\' ) >= 0;
 		return $string;
 	}
-	if ( $type eq 'My_Nodes::hash' ) {
+	if ( $type eq 'MarpaX::Demo::JSONParser::Actions::hash' ) {
 		return { map { $self -> eval_json( $_->[0] ), $self -> eval_json( $_->[1] ) }
 			    @{ $thing->[0] } };
 	}
-	return 1  if $type eq 'My_Nodes::true';
-	return '' if $type eq 'My_Nodes::false';
+	return 1  if $type eq 'MarpaX::Demo::JSONParser::Actions::true';
+	return '' if $type eq 'MarpaX::Demo::JSONParser::Actions::false';
 	return $thing;
 
 } # End of eval_json.

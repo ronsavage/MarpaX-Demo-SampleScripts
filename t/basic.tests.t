@@ -1,5 +1,7 @@
 use MarpaX::Demo::JSONParser;
 
+use Path::Tiny; # For path().
+
 use Test::More;
 use Test::Exception;
 
@@ -31,52 +33,53 @@ sub run_test
 sub run_tests
 {
 	my($user_bnf) = @_;
+	$user_bnf     = "$user_bnf"; # See Path::Tiny :-(.
 
 	$data = run_test($user_bnf, '{[}');
-	is($data, undef, 'Expect parse to die');
+	is($data, undef, "$user_bnf. Expect parse to die");
 
 	$data = run_test($user_bnf, '{"["}');
-	is($data, undef, 'Expect parse to die');
+	is($data, undef, "$user_bnf. Expect parse to die");
 
 	$data = run_test($user_bnf, '{[[}');
-	is($data, undef, 'Expect parse to die');
+	is($data, undef, "$user_bnf. Expect parse to die");
 
 	$data = run_test($user_bnf, '{"[["}');
-	is($data, undef, 'Expect parse to die');
+	is($data, undef, "$user_bnf. Expect parse to die");
 
 	$data = run_test($user_bnf, '{');
-	is($data, undef, 'Expect parse to die');
+	is($data, undef, "$user_bnf. Expect parse to die");
 
 	$data = run_test($user_bnf, '"a');
-	is($data, undef, 'Expect parse to die');
+	is($data, undef, "$user_bnf. Expect parse to die");
 
 	my $data = run_test($user_bnf, '{"test":"1"}');
-	is($$data{test}, 1, 'Expect parse to succeed');
+	is($$data{test}, 1, "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, '{"test":[1,2,3]}');
-	is_deeply($$data{test}, [1,2,3], 'Expect parse to succeed');
+	is_deeply($$data{test}, [1,2,3], "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, '{"test":true}');
-	is($$data{test}, 1, 'Expect parse to succeed');
+	is($$data{test}, 1, "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, '{"test":false}');
-	is($$data{test}, '', 'Expect parse to succeed');
+	is($$data{test}, '', "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, '{"test":null}');
-	is($$data{test}, undef, 'Expect parse to succeed');
+	is($$data{test}, undef, "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, '{"test":null, "test2":"hello world"}');
-	is($$data{test}, undef, 'Expect parse to succeed');
-	is($data->{test2}, "hello world", 'Expect parse to succeed');
+	is($$data{test}, undef, "$user_bnf. Expect parse to succeed");
+	is($data->{test2}, "hello world", "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, '{"test":"1.25"}');
-	is($$data{test}, '1.25', 'Expect parse to succeed');
+	is($$data{test}, '1.25', "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, '{"test":"1.25e4"}');
-	is($$data{test}, '1.25e4', 'Expect parse to succeed');
+	is($$data{test}, '1.25e4', "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, '[]');
-	is_deeply($data, [], 'Expect parse to succeed');
+	is_deeply($data, [], "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, <<'JSON');
 	[
@@ -110,7 +113,7 @@ JSON
 	    { "precision" => "zip", Longitude => "-122.026020", Address => "",
 	      City => "SUNNYVALE", Country => "US", Latitude => "37.371991",
 	      Zip => 94085, State => "CA" }
-	], 'Expect parse to succeed');
+	], "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, <<'JSON');
 	{
@@ -139,7 +142,7 @@ JSON
 	        },
 	        "IDs" => [ 116, 943, 234, 38793 ],
 	    }
-	}, 'Expect parse to succeed');
+	}, "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, <<'JSON');
 	{
@@ -213,30 +216,27 @@ JSON
 	        "id" => 16010789,
 	        "verified" => '' # false.
 	    }
-	}, 'Expect parse to succeed');
+	}, "$user_bnf. Expect parse to succeed");
 
 	$data = run_test($user_bnf, <<'JSON');
 	{ "test":  "\u2603" }
 JSON
 
-	is($$data{test}, "\x{2603}");
+	is($$data{test}, "\x{2603}", "$user_bnf. Expect parse to succeed");
 
-	TODO:
-	{
-		my($message) = "Marpa's SLIF doesn't understand higher than 8-bit codepoints yet";
-		local $TODO  = $message;
-
-		dies_ok {
-		    $data = run_test($user_bnf, <<'JSON');
-		{ "test":  "éáóüöï" }
+	$data = run_test($user_bnf, <<'JSON');
+	{ "test":  "éáóüöï" }
 JSON
-		}, $message;
-	}
+
+	is($$data{test}, "éáóüöï", "$user_bnf. Expect parse to succeed");
 
 } # End of run_tests;
 
 # ------------------------------------------------
 
-run_tests('data/json.1.bnf');
+for (qw/json.1.bnf json.2.bnf/)
+{
+	run_tests(path('data', $_) );
+}
 
 done_testing();
