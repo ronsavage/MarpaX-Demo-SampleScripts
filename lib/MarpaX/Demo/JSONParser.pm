@@ -193,7 +193,7 @@ C<MarpaX::Demo::JSONParser> - A JSON parser with a choice of grammars
 		$result = MarpaX::Demo::JSONParser -> new(user_bnf_file => $user_bnf) -> parse($string);
 	};
 
-	# $result is under or what you want.
+	# $result is undef, or what you hope for.
 
 See t/basic.tests.t for sample code.
 
@@ -201,7 +201,7 @@ See t/basic.tests.t for sample code.
 
 C<MarpaX::Demo::JSONParser> demonstrates 2 grammars for parsing JSON.
 
-Only 1 grammar is loaded per run, as specified in the C<user_bnf_file> option to C<< new() >>.
+Only 1 grammar is loaded per run, as specified by the C<user_bnf_file> option to C<< new() >>.
 
 See t/basic.tests.t for sample code.
 
@@ -246,7 +246,7 @@ Key-value pairs accepted in the parameter list (see corresponding methods for de
 
 Specify the name of the file containing your Marpa::R2-style grammar.
 
-See data/json.1.bnf and data/json.2.bnf for samples.
+See data/json.1.bnf and data/json.2.bnf for the 2 cases handled by the code.
 
 This option is mandatory.
 
@@ -269,10 +269,18 @@ Dies if the parse fails, or returns the result of the parse if it succeeded.
 
 This is not really a fair question. They were developed under different circumstances.
 
-json.1.bnf is an early attempt, when the Marpa SLIF still did not handle utf8.
+data/json.1.bnf was devised by Peter Stuifzand, the author of L<MarpaX::Languages::C::AST>, and published
+originally as a gist.
 
-json.2.bnf was written later, after Jeffey had a chance to study json.1.bnf, and he also used it to
-benchmark Marpa, and to test the logic in Marpa.
+data/json.2.bnf was devised by Jeffrey Kegler, the author of L<Marpa::R2>.
+
+json.1.bnf is the first attempt, when the Marpa SLIF still did not handle utf8. And it's meant to be a practical
+grammar. The sophisticated test suite is his, too.
+
+json.2.bnf was written later, after Jeffey had a chance to study json.1.bnf. He used it to help optimise Marpa,
+but with a minimal test suite, so it had a different purpose.
+
+I (Ron) converted their code into forms suitable for building this module.
 
 =head2 Where is Marpa's Homepage?
 
@@ -290,47 +298,11 @@ L<Conditional preservation of whitespace|http://savage.net.au/Ron/html/Condition
 
 =head1 See Also
 
-L<Marpa::Demo::JSONParser>.
-
 L<Marpa::Demo::StringParser>.
 
+L<Marpa::Grammar::Parser>.
+
 L<MarpaX::Languages::C::AST>.
-
-L<Data::TreeDumper>.
-
-L<Log::Handler>.
-
-=head1 ToDo
-
-=over 4
-
-=item o Compress the tree
-
-=over 4
-
-=item o Horizontal compression
-
-At the moment, the first 2 children of each 'class' type node are the offset and length within the input stream
-where the parser found each token. I want to move those into the attributes of the 'class' node, and hence remove
-those 2 nodes at each level of the tree.
-
-See data/stringparser.tree.
-
-=item o Vertical compression
-
-The tree contains many nodes which are artifacts of Marpa's processing method. I want to remove any nodes which
-do not refer directly to items in the user's grammar.
-
-=back
-
-Together this will mean the remaining nodes can be used without further modification as input to my other module
-L<Marpa::Grammar::GraphViz2>. The latter is on hold until I can effect these compressions, so don't be surprized
-if that link fails.
-
-When this work is done, there will be 2 new attributes in this module, cooked_tree() to return the root of the
-compressed tree, and cooked_tree_file(), which will name the file to use to save the new tree to disk.
-
-=back
 
 =head1 Machine-Readable Change Log
 

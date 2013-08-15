@@ -142,3 +142,66 @@ sub new
 # ------------------------------------------------
 
 1;
+
+=pod
+
+=head1 NAME
+
+C<MarpaX::Demo::JSONParser::Actions> - A JSON parser with a choice of grammars
+
+=head1 Synopsis
+
+See L<MarpaX::Demo::JSONParser/Synopsis>.
+
+The module is used automatically by L<MarpaX::Demo::JSONParser> as appropriate.
+
+=head1 Description
+
+See L<MarpaX::Demo::JSONParser/Description>.
+
+=head1 Installation
+
+See L<MarpaX::Demo::JSONParser/Installation>.
+
+=head1 Constructor and Initialization
+
+The constructor is called automatically by L<Marpa::R2> as appropriate.
+
+=head1 Methods
+
+=head2 new()
+
+The constructor is called automatically by L<Marpa::R2> as appropriate.
+
+=head1 Machine-Readable Change Log
+
+The file Changes was converted into Changelog.ini by L<Module::Metadata::Changes>.
+
+=head1 Version Numbers
+
+Version numbers < 1.00 represent development versions. From 1.00 up, they are production versions.
+
+=head1 Support
+
+Email the author, or log a bug on RT:
+
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=MarpaX::Demo::JSONParser>.
+
+=head1 Author
+
+Peter Stuifzand wrote the code in 2013.
+
+L<MarpaX::Demo::JSONParser> is now maintained by Ron Savage I<E<lt>ron@savage.net.auE<gt>>.
+
+Home page: L<http://savage.net.au/>.
+
+=head1 Copyright
+
+Australian copyright (c) 2013, Ron Savage.
+
+	All Programs of mine are 'OSI Certified Open Source Software';
+	you can redistribute them and/or modify them under the terms of
+	The Artistic License 2.0, a copy of which is available at:
+	http://www.opensource.org/licenses/index.html
+
+=cut
