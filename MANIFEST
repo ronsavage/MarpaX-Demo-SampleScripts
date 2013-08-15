@@ -1,5 +1,8 @@
 Build.PL
+Changelog.ini
 Changes
+data/json.1.bnf
+data/json.2.bnf
 lib/MarpaX/Demo/JSONParser.pm
 lib/MarpaX/Demo/JSONParser/Actions.pm
 Makefile.PL
