@@ -52,7 +52,7 @@ our $VERSION = '1.00';
 sub BUILD
 {
 	my($self) = @_;
-	my $bnf   = slurp $self -> user_file, {utf8 => 1};
+	my $bnf   = slurp $self -> bnf_file, {utf8 => 1};
 
 	$self -> base_name(basename($self -> bnf_file) );
 
