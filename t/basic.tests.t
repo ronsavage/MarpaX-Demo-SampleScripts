@@ -13,8 +13,6 @@ sub run_test
 {
 	my($user_bnf, $string) = @_;
 
-	# Try, but don't bother to catch. Just return undef.
-
 	my($result);
 
 	# Use try to catch die.

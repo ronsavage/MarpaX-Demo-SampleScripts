@@ -118,24 +118,29 @@ sub decode_string
 
 sub eval_json
 {
-	my ($self, $thing) = @_;
-	my $type = ref $thing;
+	my($self, $thing) = @_;
+	my($type) = ref $thing;
 
-	if ( $type eq 'REF' ) {
+	if ($type eq 'REF')
+	{
 		return \$self -> eval_json( ${$thing} );
 	}
-	if ( $type eq 'ARRAY' ) {
+	elsif ($type eq 'ARRAY')
+	{
 		return [ map { $self -> eval_json($_) } @{$thing} ];
 	}
-	if ( $type eq 'MarpaX::Demo::JSONParser::Actions::string' ) {
-		my $string = substr $thing->[0], 1, -1;
+	elsif ($type eq 'MarpaX::Demo::JSONParser::Actions::string')
+	{
+		my($string) = substr $thing->[0], 1, -1;
+
 		return $self -> decode_string($string) if ( index $string, '\\' ) >= 0;
 		return $string;
 	}
-	if ( $type eq 'MarpaX::Demo::JSONParser::Actions::hash' ) {
-		return { map { $self -> eval_json( $_->[0] ), $self -> eval_json( $_->[1] ) }
-			    @{ $thing->[0] } };
+	elsif ($type eq 'MarpaX::Demo::JSONParser::Actions::hash')
+	{
+		return { map { $self -> eval_json( $_->[0] ), $self -> eval_json( $_->[1] ) } @{ $thing->[0] } };
 	}
+
 	return 1  if $type eq 'MarpaX::Demo::JSONParser::Actions::true';
 	return '' if $type eq 'MarpaX::Demo::JSONParser::Actions::false';
 	return $thing;
