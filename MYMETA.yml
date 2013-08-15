@@ -17,10 +17,10 @@ name: MarpaX-Demo-JSONParser
 provides:
   MarpaX::Demo::JSONParser:
     file: lib/MarpaX/Demo/JSONParser.pm
-    version: 1
+    version: 1.00
   MarpaX::Demo::JSONParser::Actions:
     file: lib/MarpaX/Demo/JSONParser/Actions.pm
-    version: 1
+    version: 1.00
 requires:
   File::Basename: 2.82
   Marpa::R2: 2.058
@@ -32,4 +32,4 @@ requires:
   warnings: 0
 resources:
   license: http://www.perlfoundation.org/artistic_license_2_0
-version: 1
+version: 1.00
