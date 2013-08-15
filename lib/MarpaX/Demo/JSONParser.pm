@@ -168,3 +168,197 @@ sub parse
 # ------------------------------------------------
 
 1;
+
+=pod
+
+=head1 NAME
+
+C<MarpaX::Demo::JSONParser> - A JSON parser with a choice of grammars
+
+=head1 Synopsis
+
+	use MarpaX::Demo::JSONParser;
+
+	use Try::Tiny;
+
+	my($user_bnf) = 'data/json.1.bnf'; # Or data/json.2.bnf.
+	my($string)   = 'My data';
+
+	my($result);
+
+	# Use try to catch die.
+
+	try
+	{
+		$result = MarpaX::Demo::JSONParser -> new(user_bnf_file => $user_bnf) -> parse($string);
+	};
+
+	# $result is under or what you want.
+
+See t/basic.tests.t for sample code.
+
+=head1 Description
+
+C<MarpaX::Demo::JSONParser> demonstrates 2 grammars for parsing JSON.
+
+Only 1 grammar is loaded per run, as specified in the C<user_bnf_file> option to C<< new() >>.
+
+See t/basic.tests.t for sample code.
+
+=head1 Installation
+
+Install C<MarpaX::Demo::JSONParser> as you would for any C<Perl> module:
+
+Run:
+
+	cpanm MarpaX::Demo::JSONParser
+
+or run:
+
+	sudo cpan MarpaX::Demo::JSONParser
+
+or unpack the distro, and then either:
+
+	perl Build.PL
+	./Build
+	./Build test
+	sudo ./Build install
+
+or:
+
+	perl Makefile.PL
+	make (or dmake or nmake)
+	make test
+	make install
+
+=head1 Constructor and Initialization
+
+C<new()> is called as C<< my($parser) = MarpaX::Demo::JSONParser -> new(k1 => v1, k2 => v2, ...) >>.
+
+It returns a new object of type C<MarpaX::Demo::JSONParser>.
+
+Key-value pairs accepted in the parameter list (see corresponding methods for details
+[e.g. user_bnf_file([$string])]):
+
+=over 4
+
+=item o user_bnf_file aUserGrammarFileName
+
+Specify the name of the file containing your Marpa::R2-style grammar.
+
+See data/json.1.bnf and data/json.2.bnf for samples.
+
+This option is mandatory.
+
+Default: ''.
+
+=back
+
+=head1 Methods
+
+=head2 parse($string)
+
+Parses the given $string using the grammar whose file name was provided by the C<user_bnf_file> option to
+C<< new() >>.
+
+Dies if the parse fails, or returns the result of the parse if it succeeded.
+
+=head1 FAQ
+
+=head2 Which JSON BNF is best?
+
+This is not really a fair question. They were developed under different circumstances.
+
+json.1.bnf is an early attempt, when the Marpa SLIF still did not handle utf8.
+
+json.2.bnf was written later, after Jeffey had a chance to study json.1.bnf, and he also used it to
+benchmark Marpa, and to test the logic in Marpa.
+
+=head2 Where is Marpa's Homepage?
+
+L<http://jeffreykegler.github.io/Ocean-of-Awareness-blog/>.
+
+=head2 Are there any articles discussing Marpa?
+
+Yes, many by its author, and several others. See Marpa's homepage, just above, and:
+
+L<The Marpa Guide|http://marpa-guide.github.io/> (in progress, by Peter Stuifzand and Ron Savage).
+
+L<Parsing a here doc|http://peterstuifzand.nl/2013/04/19/parse-a-heredoc-with-marpa.html> by Peter Stuifzand.
+
+L<Conditional preservation of whitespace|http://savage.net.au/Ron/html/Conditional.preservation.of.whitespace.html> by Ron Savage.
+
+=head1 See Also
+
+L<Marpa::Demo::JSONParser>.
+
+L<Marpa::Demo::StringParser>.
+
+L<MarpaX::Languages::C::AST>.
+
+L<Data::TreeDumper>.
+
+L<Log::Handler>.
+
+=head1 ToDo
+
+=over 4
+
+=item o Compress the tree
+
+=over 4
+
+=item o Horizontal compression
+
+At the moment, the first 2 children of each 'class' type node are the offset and length within the input stream
+where the parser found each token. I want to move those into the attributes of the 'class' node, and hence remove
+those 2 nodes at each level of the tree.
+
+See data/stringparser.tree.
+
+=item o Vertical compression
+
+The tree contains many nodes which are artifacts of Marpa's processing method. I want to remove any nodes which
+do not refer directly to items in the user's grammar.
+
+=back
+
+Together this will mean the remaining nodes can be used without further modification as input to my other module
+L<Marpa::Grammar::GraphViz2>. The latter is on hold until I can effect these compressions, so don't be surprized
+if that link fails.
+
+When this work is done, there will be 2 new attributes in this module, cooked_tree() to return the root of the
+compressed tree, and cooked_tree_file(), which will name the file to use to save the new tree to disk.
+
+=back
+
+=head1 Machine-Readable Change Log
+
+The file Changes was converted into Changelog.ini by L<Module::Metadata::Changes>.
+
+=head1 Version Numbers
+
+Version numbers < 1.00 represent development versions. From 1.00 up, they are production versions.
+
+=head1 Support
+
+Email the author, or log a bug on RT:
+
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=MarpaX::Demo::JSONParser>.
+
+=head1 Author
+
+L<MarpaX::Demo::JSONParser> was written by Ron Savage I<E<lt>ron@savage.net.auE<gt>> in 2013.
+
+Home page: L<http://savage.net.au/>.
+
+=head1 Copyright
+
+Australian copyright (c) 2013, Ron Savage.
+
+	All Programs of mine are 'OSI Certified Open Source Software';
+	you can redistribute them and/or modify them under the terms of
+	The Artistic License 2.0, a copy of which is available at:
+	http://www.opensource.org/licenses/index.html
+
+=cut
