@@ -10,3 +10,4 @@ MANIFEST			This list of files
 META.json
 META.yml
 t/basic.tests.t
+xt/author/pod.t
