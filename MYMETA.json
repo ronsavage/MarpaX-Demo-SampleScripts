@@ -27,8 +27,12 @@
       },
       "runtime" : {
          "requires" : {
+            "File::Basename" : "2.82",
             "Marpa::R2" : "2.058",
             "Moo" : "1.002",
+            "Path::Tiny" : "0.025",
+            "Perl6::Slurp" : "0.051003",
+            "Try::Tiny" : "0.16",
             "strict" : "0",
             "warnings" : "0"
          }
