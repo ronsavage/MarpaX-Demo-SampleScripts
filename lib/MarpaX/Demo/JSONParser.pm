@@ -45,7 +45,7 @@ has user_bnf_file =>
 	required => 1,
 );
 
-our $VERSION = 1.00;
+our $VERSION = '1.00';
 
 # ------------------------------------------------
 

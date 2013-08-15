@@ -7,7 +7,7 @@ use warnings;
 # This class needs a sub new() due to the way
 # Marpa calls the constructor.
 
-our $VERSION = 1.00;
+our $VERSION = '1.00';
 
 # ------------------------------------------------
 
