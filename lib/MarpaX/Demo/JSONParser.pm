@@ -290,11 +290,13 @@ L<http://jeffreykegler.github.io/Ocean-of-Awareness-blog/>.
 
 Yes, many by its author, and several others. See Marpa's homepage, just above, and:
 
-L<The Marpa Guide|http://marpa-guide.github.io/> (in progress, by Peter Stuifzand and Ron Savage).
+L<The Marpa Guide|http://marpa-guide.github.io/>, (in progress, by Peter Stuifzand and Ron Savage).
 
-L<Parsing a here doc|http://peterstuifzand.nl/2013/04/19/parse-a-heredoc-with-marpa.html> by Peter Stuifzand.
+L<Parsing a here doc|http://peterstuifzand.nl/2013/04/19/parse-a-heredoc-with-marpa.html>, by Peter Stuifzand.
 
-L<Conditional preservation of whitespace|http://savage.net.au/Ron/html/Conditional.preservation.of.whitespace.html> by Ron Savage.
+L<An update of parsing here docs|http://peterstuifzand.nl/2013/04/22/changes-to-the-heredoc-parser-example.html>, by Peter Stuifzand.
+
+L<Conditional preservation of whitespace|http://savage.net.au/Ron/html/Conditional.preservation.of.whitespace.html>, by Ron Savage.
 
 =head1 See Also
 
