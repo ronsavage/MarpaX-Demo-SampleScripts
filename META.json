@@ -1,0 +1,54 @@
+{
+   "abstract" : "A Marpa-based parser for JSON files",
+   "author" : [
+      "Ron Savage <ron@savage.net.au>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.131560",
+   "license" : [
+      "artistic_2"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "MarpaX-Demo-JSON_1",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::Exception" : "0.31",
+            "Test::More" : "0.94"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.38"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Marpa::R2" : "2.058",
+            "Moo" : "1.002",
+            "strict" : "0",
+            "warnings" : "0"
+         }
+      }
+   },
+   "provides" : {
+      "MarpaX::Demo::JSON_1" : {
+         "file" : "lib/MarpaX/Demo/JSON_1.pm",
+         "version" : "1"
+      },
+      "MarpaX::Demo::JSON_1::Actions" : {
+         "file" : "lib/MarpaX/Demo/JSON_1/Actions.pm",
+         "version" : "1"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://www.perlfoundation.org/artistic_license_2_0"
+      ]
+   },
+   "version" : "1"
+}
