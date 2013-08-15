@@ -1,5 +1,5 @@
 {
-   "abstract" : "A Marpa-based parser for JSON files",
+   "abstract" : "A JSON parser with a choice of grammars",
    "author" : [
       "Ron Savage <ron@savage.net.au>"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "MarpaX-Demo-JSON_1",
+   "name" : "MarpaX-Demo-JSONParser",
    "prereqs" : {
       "build" : {
          "requires" : {
@@ -39,12 +39,12 @@
       }
    },
    "provides" : {
-      "MarpaX::Demo::JSON_1" : {
-         "file" : "lib/MarpaX/Demo/JSON_1.pm",
+      "MarpaX::Demo::JSONParser" : {
+         "file" : "lib/MarpaX/Demo/JSONParser.pm",
          "version" : "1"
       },
-      "MarpaX::Demo::JSON_1::Actions" : {
-         "file" : "lib/MarpaX/Demo/JSON_1/Actions.pm",
+      "MarpaX::Demo::JSONParser::Actions" : {
+         "file" : "lib/MarpaX/Demo/JSONParser/Actions.pm",
          "version" : "1"
       }
    },
