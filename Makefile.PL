@@ -1,44 +1,31 @@
-use strict;
-use warnings;
-
 use ExtUtils::MakeMaker;
 
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
+use inc::Module::Install;
 
-WriteMakefile
-(
-	($] ge '5.005') ?
-	(
-		AUTHOR   => 'Ron Savage (ron@savage.net.au)',
-		ABSTRACT => 'A JSON parser with a choice of grammars',
-	) : (),
-	clean =>
-	{
-		FILES => 'blib/* Makefile MANIFEST MarpaX-Demo-JSONParser-*'
-	},
-	dist =>
-	{
-		COMPRESS => 'gzip',
-		SUFFIX   => 'gz'
-	},
-	DISTNAME  => 'MarpaX-Demo-JSONParser',
-	NAME      => 'MarpaX::Demo::JSONParser',
-	LICENSE   => 'artistic_2',
-	PL_FILES  => {},
-	PREREQ_PM =>
-	{
-		'File::Basename'  => 2.82,
-		'Marpa::R2'       => 2.058000,
-		'Moo'             => 1.002000,
-		'Path::Tiny'      => 0.025,
-		'Perl6::Slurp'    => 0.051003,
-		'strict'          => 0,
-		'Test::Exception' => 0.31,
-		'Test::More'      => 0.94,
-#		'Test::Pod'       => 1.45, # Make it optional. See t/pod.t
-		'Try::Tiny'       => 0.16,
-		'warnings'        => 0,
-	},
-	VERSION_FROM => 'lib/MarpaX/Demo/JSONParser.pm',
-);
+# -----------------------------------------------
+
+name 'MarpaX-Demo-JSONParser';
+
+license 'artistic_2';
+
+perl_version '5.014000';
+
+all_from 'lib/MarpaX/Demo/JSONParser.pm';
+
+install_share;
+
+requires 'File::Basename' => 2.82;
+requires 'Marpa::R2'      => 2.058000;
+requires 'Moo'            => 1.002000;
+requires 'Path::Tiny'     => 0.025;
+requires 'Perl6::Slurp'   => 0.051003;
+requires 'strict'         => 0;
+requires 'Try::Tiny'      => 0.16;
+requires 'warnings'       => 0;
+
+test_requires 'Test::More' => 0.98;
+#test_requires 'Test::Pod'  => 1.45; # Make it optional. See t/pod.t
+
+recursive_author_tests('xt');
+
+WriteAll;

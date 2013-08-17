@@ -16,8 +16,8 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::Exception" : "0.31",
-            "Test::More" : "0.94"
+            "ExtUtils::MakeMaker" : "6.59",
+            "Test::More" : "0.98"
          }
       },
       "configure" : {
@@ -33,6 +33,7 @@
             "Path::Tiny" : "0.025",
             "Perl6::Slurp" : "0.051003",
             "Try::Tiny" : "0.16",
+            "perl" : "5.014",
             "strict" : "0",
             "warnings" : "0"
          }

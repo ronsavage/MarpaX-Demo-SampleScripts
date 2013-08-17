@@ -45,7 +45,7 @@ has scanner =>
 	required => 0,
 );
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 # ------------------------------------------------
 
@@ -264,6 +264,42 @@ C<< new() >>.
 Dies if the parse fails, or returns the result of the parse if it succeeded.
 
 =head1 FAQ
+
+=head2 Where are the grammars which ship with the module actually installed?
+
+They are not installed (when the source code is) under V 1.00.
+
+Under V 1.01, I use L<File::ShareDir> and L<Module::Install>.
+
+This a complex topic. Here are some of the issues:
+
+=over 4
+
+=item o Install in the user's home directory, using L<File::HomeDir>
+
+Problem: Some CPAN testers run with accounts which don't have home directories.
+
+I have used <File::HomeDir> when shipping modules, but that problem means I switched to L<File::ShareDir>. But...
+
+=item o Install in a shared directory, using L<File::ShareDir>
+
+Problem: Using L<File::ShareDir> requires L<Module::Install> during installation, and the latter has 77 bugs on RT,
+although some of them may have been fixed.
+
+Problem: Using L<File::ShareDir> requires using Makefile.PL rather that my preferred choice Build.PL. Sigh.
+
+Problem: Using L<File::ShareDir> means the grammar files will be installed many directories deep, which again is
+something I don't like doing.
+
+Problem: Using L<Module::Install> by itself does not support author tests. That needs L<Module::Install::AuthorTests>.
+
+=back
+
+Depite all this, for V 1.01 I've used L<File::ShareDir>. And you can now run:
+
+	shell> perl -Ilib scripts/find.grammars.pl
+
+This reports the directory into which the grammars were installed.
 
 =head2 Which JSON BNF is best?
 
