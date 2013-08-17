@@ -234,7 +234,7 @@ JSON
 
 for (qw/json.1.bnf json.2.bnf/)
 {
-	run_tests(path('data', $_) );
+	run_tests(path('share', $_) );
 }
 
 done_testing();
