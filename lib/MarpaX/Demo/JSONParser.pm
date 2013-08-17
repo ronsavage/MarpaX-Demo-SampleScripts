@@ -81,7 +81,7 @@ sub BUILD
 	}
 	else
 	{
-		die "Unknown BNF. Use either 'data/json.1.bnf' or 'data/json.2.bnf'\n";
+		die "Unknown BNF. Use either 'json.1.bnf' or 'json.2.bnf'\n";
 	}
 
 	$self -> scanner
@@ -177,12 +177,21 @@ C<MarpaX::Demo::JSONParser> - A JSON parser with a choice of grammars
 
 =head1 Synopsis
 
+	#!/usr/bin/env perl
+
+	use strict;
+	use warnings;
+
+	use File::ShareDir;
+
 	use MarpaX::Demo::JSONParser;
 
 	use Try::Tiny;
 
-	my($bnf_file) = 'data/json.1.bnf'; # Or data/json.2.bnf.
-	my($string)   = 'My data';
+	my($app_name) = 'MarpaX-Demo-JSONParser';
+	my($bnf_name) = 'json.1.bnf'; # Or 'json.2.bnf'. See scripts/find.grammars.pl below.
+	my($bnf_file) = File::ShareDir::dist_file($app_name, $bnf_name);
+	my($string)   = '{"test":"1.25e4"}';
 
 	my($result);
 
@@ -193,9 +202,11 @@ C<MarpaX::Demo::JSONParser> - A JSON parser with a choice of grammars
 		$result = MarpaX::Demo::JSONParser -> new(bnf_file => $bnf_file) -> parse($string);
 	};
 
-	# $result is undef, or what you hope for.
+	print $result ? "Result: test => $$result{test}. Expect: 1.25e4. \n" : "Parse failed. \n";
 
-See t/basic.tests.t for sample code.
+This script ships as scripts/demo.pl.
+
+See also t/basic.tests.t for more sample code.
 
 =head1 Description
 
@@ -263,13 +274,51 @@ C<< new() >>.
 
 Dies if the parse fails, or returns the result of the parse if it succeeded.
 
+=head1 Files Shipped with this Module
+
+=over 4
+
+=item o scripts/demo.pl
+
+This program is exactly what is displayed in the L</Synopsis> above.
+
+Before installation of this module, run it with:
+
+	shell> perl -Ilib scripts/demo.pl
+
+And after installation, just use:
+
+	shell> perl scripts/demo.pl
+
+=item o scripts/find.grammars.pl
+
+After installation of the module, run it with:
+
+	shell> perl scripts/find.grammars.pl (Defaults to json.1.bnf)
+	shell> perl scripts/find.grammars.pl json.1.bnf
+	shell> perl scripts/find.grammars.pl json.2.bnf
+
+It will print the name of the path to given grammar file.
+
+=item o share/json.1.bnf
+
+This JSON grammar was devised by Peter Stuifzand.
+
+=item o share/json.2.bnf
+
+This JSON grammar was devised by Jeffrey Kegler.
+
+These 2 JSON grammars are discussed in the L</FAQ> below.
+
+=back
+
 =head1 FAQ
 
-=head2 Where are the grammars which ship with the module actually installed?
+=head2 Where are the grammar files actually installed?
 
 They are not installed (when the source code is) under V 1.00.
 
-Under V 1.01, I use L<File::ShareDir> and L<Module::Install>.
+From V 1.01 on, I use L<File::ShareDir> and L<Module::Install> to install them.
 
 This a complex topic. Here are some of the issues:
 
@@ -279,25 +328,32 @@ This a complex topic. Here are some of the issues:
 
 Problem: Some CPAN testers run with accounts which don't have home directories.
 
-I have used <File::HomeDir> when shipping modules, but that problem means I switched to L<File::ShareDir>. But...
+I have used L<File::HomeDir> when shipping modules, but that problem means I switched to L<File::ShareDir>. But...
 
 =item o Install in a shared directory, using L<File::ShareDir>
 
-Problem: Using L<File::ShareDir> requires L<Module::Install> during installation, and the latter has 77 bugs on RT,
-although some of them may have been fixed.
+Problem: Using L<File::ShareDir> requires L<Module::Install> during installation.
 
-Problem: Using L<File::ShareDir> requires using Makefile.PL rather that my preferred choice Build.PL. Sigh.
+The latter has 77 bugs on RT, although some of them may have been fixed.
 
-Problem: Using L<File::ShareDir> means the grammar files will be installed many directories deep, which again is
-something I don't like doing.
+Problem: Using L<File::ShareDir> requires using Makefile.PL rather that my preferred choice Build.PL.
 
-Problem: Using L<Module::Install> by itself does not support author tests. That needs L<Module::Install::AuthorTests>.
+Sigh.
+
+Problem: Using L<File::ShareDir> means the grammar files will be installed many directories deep.
+
+Again, this is something I don't like doing. On my machine, there are 13 dir names listed when I run
+scripts/find.grammars.pl.
+
+Problem: Using L<Module::Install> by itself does not support author tests.
+
+That needs L<Module::Install::AuthorTests>.
 
 =back
 
 Depite all this, for V 1.01 I've used L<File::ShareDir>. And you can now run:
 
-	shell> perl -Ilib scripts/find.grammars.pl
+	shell> perl scripts/find.grammars.pl
 
 This reports the directory into which the grammars were installed.
 
@@ -305,13 +361,13 @@ This reports the directory into which the grammars were installed.
 
 This is not really a fair question. They were developed under different circumstances.
 
-data/json.1.bnf was devised by Peter Stuifzand, the author of L<MarpaX::Languages::C::AST>, and published
+json.1.bnf is by Peter Stuifzand, the author of L<MarpaX::Languages::C::AST>, and was published
 originally as a gist.
-
-data/json.2.bnf was devised by Jeffrey Kegler, the author of L<Marpa::R2>.
 
 json.1.bnf is the first attempt, when the Marpa SLIF still did not handle utf8. And it's meant to be a practical
 grammar. The sophisticated test suite is his, too.
+
+json.2.bnf is by Jeffrey Kegler, the author of L<Marpa::R2>.
 
 json.2.bnf was written later, after Jeffey had a chance to study json.1.bnf. He used it to help optimise Marpa,
 but with a minimal test suite, so it had a different purpose.
