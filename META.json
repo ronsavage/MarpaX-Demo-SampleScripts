@@ -41,11 +41,11 @@
    "provides" : {
       "MarpaX::Demo::JSONParser" : {
          "file" : "lib/MarpaX/Demo/JSONParser.pm",
-         "version" : "1.00"
+         "version" : "1.02"
       },
       "MarpaX::Demo::JSONParser::Actions" : {
          "file" : "lib/MarpaX/Demo/JSONParser/Actions.pm",
-         "version" : "1.00"
+         "version" : "1.02"
       }
    },
    "release_status" : "stable",
@@ -54,5 +54,5 @@
          "http://www.perlfoundation.org/artistic_license_2_0"
       ]
    },
-   "version" : "1.00"
+   "version" : "1.02"
 }

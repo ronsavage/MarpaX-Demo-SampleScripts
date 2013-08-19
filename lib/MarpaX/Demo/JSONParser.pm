@@ -332,6 +332,8 @@ This a complex topic. Here are some of the issues:
 
 =over 4
 
+=item o Module::Install makes it hard to update *META.* after you update the module's version #
+
 =item o Install in the user's home directory, using L<File::HomeDir>
 
 Problem: Some CPAN testers run with accounts which don't have home directories.
