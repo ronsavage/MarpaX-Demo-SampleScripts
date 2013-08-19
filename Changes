@@ -1,5 +1,13 @@
 Revision history for Perl extension MarpaX::Demo::JSONParser.
 
+1.02  Tue Aug 20 08:13:00 2012
+	- In t/basic.test.t, put quotes around giant integers, so Perl compares them as strings.
+		CPAN testers are getting errors like this:
+		     $got->{id} = '281405942321532929'
+		$expected->{id} = '2.81405942321533e+017'
+	- Add README file.
+	- Correct docs: Jean-Damien Durand authored json.1.bnf and MarpaX::Languages::C::AST, not Peter Stuifzand.
+
 1.01  Sat Aug 17 09:34:00 2013
 	- Replace Peter's JSON grammar with one using spaces (from his original gist). I had used tabs.
 	- Move the grammars from data/*.bnf to share/*.bnf. This, together with adopting File::ShareDir and
