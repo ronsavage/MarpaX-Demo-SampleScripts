@@ -334,6 +334,8 @@ This a complex topic. Here are some of the issues:
 
 =item o Module::Install makes it hard to update *META.* after you update the module's version #
 
+It puts them in the dist but not in the current directory (alongside Makefile.PL, etc).
+
 =item o Install in the user's home directory, using L<File::HomeDir>
 
 Problem: Some CPAN testers run with accounts which don't have home directories.
