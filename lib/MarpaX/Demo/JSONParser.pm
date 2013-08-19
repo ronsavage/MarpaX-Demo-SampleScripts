@@ -276,6 +276,24 @@ Dies if the parse fails, or returns the result of the parse if it succeeded.
 
 =head1 Files Shipped with this Module
 
+=head2 Data Files
+
+=over 4
+
+=item o share/json.1.bnf
+
+This JSON grammar was devised by Peter Stuifzand.
+
+=item o share/json.2.bnf
+
+This JSON grammar was devised by Jeffrey Kegler.
+
+These 2 JSON grammars are discussed in the L</FAQ> below.
+
+=back
+
+=head2 Scripts
+
 =over 4
 
 =item o scripts/demo.pl
@@ -299,16 +317,6 @@ After installation of the module, run it with:
 	shell> perl scripts/find.grammars.pl json.2.bnf
 
 It will print the name of the path to given grammar file.
-
-=item o share/json.1.bnf
-
-This JSON grammar was devised by Peter Stuifzand.
-
-=item o share/json.2.bnf
-
-This JSON grammar was devised by Jeffrey Kegler.
-
-These 2 JSON grammars are discussed in the L</FAQ> below.
 
 =back
 
