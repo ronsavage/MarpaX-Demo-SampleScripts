@@ -403,9 +403,9 @@ L<Conditional preservation of whitespace|http://savage.net.au/Ron/html/Condition
 
 =head1 See Also
 
-L<Marpa::Demo::StringParser>.
+L<MarpaX::Demo::StringParser>.
 
-L<Marpa::Grammar::Parser>.
+L<MarpaX::Grammar::Parser>.
 
 L<MarpaX::Languages::C::AST>.
 
