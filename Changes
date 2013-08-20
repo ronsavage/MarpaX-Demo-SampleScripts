@@ -1,5 +1,8 @@
 Revision history for Perl extension MarpaX::Demo::JSONParser.
 
+1.03  Not released
+	- Fix a couple of typos in 'See Also'.
+
 1.02  Tue Aug 20 08:13:00 2012
 	- In t/basic.test.t, put quotes around giant integers, so Perl compares them as strings.
 		CPAN testers are getting errors like this:
