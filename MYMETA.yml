@@ -4,6 +4,7 @@ author:
   - 'Ron Savage <ron@savage.net.au>'
 build_requires:
   ExtUtils::MakeMaker: 6.59
+  Test::Exception: 0.31
   Test::More: 0.98
 configure_requires:
   Module::Build: 0.38
@@ -17,10 +18,10 @@ name: MarpaX-Demo-JSONParser
 provides:
   MarpaX::Demo::JSONParser:
     file: lib/MarpaX/Demo/JSONParser.pm
-    version: 1.02
+    version: 1.03
   MarpaX::Demo::JSONParser::Actions:
     file: lib/MarpaX/Demo/JSONParser/Actions.pm
-    version: 1.02
+    version: 1.03
 requires:
   File::Basename: 2.82
   Marpa::R2: 2.058
@@ -33,4 +34,4 @@ requires:
   warnings: 0
 resources:
   license: http://www.perlfoundation.org/artistic_license_2_0
-version: 1.02
+version: 1.03

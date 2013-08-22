@@ -23,8 +23,9 @@ requires 'strict'         => 0;
 requires 'Try::Tiny'      => 0.16;
 requires 'warnings'       => 0;
 
-test_requires 'Test::More' => 0.98;
-#test_requires 'Test::Pod'  => 1.45; # Make it optional. See t/pod.t
+test_requires 'Test::Exception' => 0.31;
+test_requires 'Test::More'      => 0.98;
+#test_requires 'Test::Pod'      => 1.45; # Make it optional. See t/pod.t
 
 recursive_author_tests('xt');
 
