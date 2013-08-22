@@ -15,6 +15,7 @@ all_from 'lib/MarpaX/Demo/JSONParser.pm';
 install_share;
 
 requires 'File::Basename' => 2.82;
+requires 'File::ShareDir' => 1.03;
 requires 'Marpa::R2'      => 2.058000;
 requires 'Moo'            => 1.002000;
 requires 'Path::Tiny'     => 0.025;
