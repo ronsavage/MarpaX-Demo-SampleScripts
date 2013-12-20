@@ -9,8 +9,8 @@ ftp://ftp.info-zip.org/pub/infozip/
 
 1 Installing from a Unix-like distro
 ------------------------------------
-shell>gunzip MarpaX-Demo-JSONParser-1.01.tgz
-shell>tar mxvf MarpaX-Demo-JSONParser-1.01.tar
+shell>gunzip MarpaX-Demo-JSONParser-1.03.tgz
+shell>tar mxvf MarpaX-Demo-JSONParser-1.03.tar
 
 On Unix-like systems, assuming you have installed Module::Build V 0.25+:
 
@@ -43,7 +43,7 @@ Run JSONParser.pm through your favourite pod2html translator.
 
 2 Installing from an ActiveState distro
 ---------------------------------------
-shell>unzip MarpaX-Demo-JSONParser-1.01.zip
+shell>unzip MarpaX-Demo-JSONParser-1.03.zip
 shell>ppm install --location=. MarpaX-Demo-JSONParser
-shell>del MarpaX-Demo-JSONParser-1.01.ppd
-shell>del PPM-MarpaX-Demo-JSONParser-1.01.tar.gz
+shell>del MarpaX-Demo-JSONParser-1.03.ppd
+shell>del PPM-MarpaX-Demo-JSONParser-1.03.tar.gz
