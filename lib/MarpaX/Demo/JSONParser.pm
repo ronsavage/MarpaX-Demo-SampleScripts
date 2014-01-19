@@ -45,7 +45,7 @@ has scanner =>
 	required => 0,
 );
 
-our $VERSION = '1.03';
+our $VERSION = '1.04';
 
 # ------------------------------------------------
 
@@ -282,7 +282,7 @@ Dies if the parse fails, or returns the result of the parse if it succeeded.
 
 =item o share/json.1.bnf
 
-This JSON grammar was devised by Jean-Damien Durand.
+This JSON grammar was devised by Peter Stuifzand.
 
 =item o share/json.2.bnf
 
@@ -373,7 +373,7 @@ This reports the directory into which the grammars were installed.
 
 This is not really a fair question. They were developed under different circumstances.
 
-json.1.bnf is by Jean-Damien Durand, the author of L<MarpaX::Languages::C::AST>.
+json.1.bnf is by Peter Stuifzand.
 
 json.1.bnf is the first attempt, when the Marpa SLIF still did not handle utf8. And it's meant to be a practical
 grammar. The sophisticated test suite is his, too.

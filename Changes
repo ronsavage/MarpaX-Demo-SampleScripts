@@ -1,5 +1,9 @@
 Revision history for Perl extension MarpaX::Demo::JSONParser.
 
+1.04  Mon Jan 20 08:33:00 2014
+	- Correct docs: Jean-Damien Durand authored MarpaX::Languages::C::AST, but Peter Stuifzand
+		authored json.1.bnf. This reverses the faulty correction in V 1.02. My apologies to Peter.
+
 1.03  Thu Aug 22 12:44:00 2013
 	- Fix a couple of typos in 'See Also'.
 	- Add Test::Exception to the pre-reqs.
