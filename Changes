@@ -1,5 +1,12 @@
 Revision history for Perl extension MarpaX::Demo::JSONParser.
 
+1.06  Sat Feb 22 17:44:00 2014
+	- Add 'lexeme default = latm => 1' to the grammar.
+	- Make V 2.082 the minimum version for Marpa::R2.
+
+1.05  Sat Feb 22 17:44:00 2014
+	- Add 'lexeme default = forgiving => 1' to the grammar.
+
 1.04  Mon Jan 20 08:33:00 2014
 	- Correct docs: Jean-Damien Durand authored MarpaX::Languages::C::AST, but Peter Stuifzand
 		authored json.1.bnf. This reverses the faulty correction in V 1.02. My apologies to Peter.

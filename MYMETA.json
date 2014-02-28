@@ -30,7 +30,7 @@
          "requires" : {
             "File::Basename" : "2.82",
             "File::ShareDir" : "1.03",
-            "Marpa::R2" : "2.058",
+            "Marpa::R2" : "2.08",
             "Moo" : "1.002",
             "Path::Tiny" : "0.025",
             "Perl6::Slurp" : "0.051003",
