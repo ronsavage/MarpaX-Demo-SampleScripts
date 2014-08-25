@@ -7,6 +7,8 @@ use Test::Exception;
 
 use Try::Tiny;
 
+my($count) = 0;
+
 # ------------------------------------------------
 
 sub run_test
@@ -21,6 +23,8 @@ sub run_test
 	{
 		$result = MarpaX::Demo::JSONParser -> new(bnf_file => $bnf_file) -> parse($string);
 	};
+
+	$count++;
 
 	return $result;
 
@@ -236,5 +240,7 @@ for (qw/json.1.bnf json.2.bnf/)
 {
 	run_tests(path('share', $_) );
 }
+
+print "# Internal test count: $count. \n";
 
 done_testing();
