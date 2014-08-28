@@ -62,7 +62,6 @@ sub BUILD
 		(
 			Marpa::R2::Scanless::G -> new
 			({
-				action_object  => 'MarpaX::Demo::JSONParser::Actions',
 				default_action => 'do_first_arg',
 				source         => \$bnf,
 			})
@@ -88,7 +87,8 @@ sub BUILD
 	(
 		Marpa::R2::Scanless::R -> new
 		({
-			grammar => $self -> grammar
+			grammar           => $self -> grammar,
+			semantics_package => 'MarpaX::Demo::JSONParser::Actions',
 		})
 	);
 
