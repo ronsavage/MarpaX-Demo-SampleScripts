@@ -362,7 +362,7 @@ Key-value pairs accepted in the parameter list (see corresponding methods for de
 
 Specify the name of the file containing your Marpa::R2-style grammar.
 
-See data/json.1.bnf and data/json.2.bnf for the 2 cases handled by the code.
+See data/json.1.bnf, data/json.2.bnf and data/json.3.bnf for the cases handled by the code.
 
 This option is mandatory.
 
@@ -383,6 +383,8 @@ Dies if the parse fails, or returns the result of the parse if it succeeded.
 
 =head2 Data Files
 
+These JSON grammars are discussed in the L</FAQ> below.
+
 =over 4
 
 =item o share/json.1.bnf
@@ -393,7 +395,9 @@ This JSON grammar was devised by Peter Stuifzand.
 
 This JSON grammar was devised by Jeffrey Kegler.
 
-These 2 JSON grammars are discussed in the L</FAQ> below.
+=item o share/json.3.bnf
+
+This JSON grammar was devised by Jeffrey Kegler.
 
 =back
 
@@ -419,7 +423,8 @@ After installation of the module, run it with:
 
 	shell> perl scripts/find.grammars.pl (Defaults to json.1.bnf)
 	shell> perl scripts/find.grammars.pl json.1.bnf
-	shell> perl scripts/find.grammars.pl json.2.bnf
+
+Or use json.2.bnf or json.2.bnf.
 
 It will print the name of the path to given grammar file.
 
@@ -478,21 +483,27 @@ This reports the directory into which the grammars were installed.
 
 This is not really a fair question. They were developed under different circumstances.
 
-json.1.bnf is by Peter Stuifzand.
+=over 4
+
+=item o json.1.bnf is by Peter Stuifzand.
 
 json.1.bnf is the first attempt, when the Marpa SLIF still did not handle utf8. And it's meant to be a practical
 grammar. The sophisticated test suite is his, too.
 
-json.2.bnf is by Jeffrey Kegler, the author of L<Marpa::R2>.
+=item o json.2.bnf is by Jeffrey Kegler, the author of L<Marpa::R2>.
 
 json.2.bnf was written later, after Jeffey had a chance to study json.1.bnf. He used it to help optimise Marpa,
 but with a minimal test suite, so it had a different purpose.
 
 I (Ron) converted their code into forms suitable for building this module.
 
+=item o json.3.bnf is by Jeffrey Kegler.
+
+He developed this in August, 2014, after recent significant progress in the writing of Marpa.
+
 =head2 Where is Marpa's Homepage?
 
-L<http://jeffreykegler.github.io/Ocean-of-Awareness-blog/>.
+L<http://savage.net.au/Marpa.html>.
 
 =head2 Are there any articles discussing Marpa?
 

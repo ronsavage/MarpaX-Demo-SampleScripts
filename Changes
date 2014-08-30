@@ -1,5 +1,13 @@
 Revision history for Perl extension MarpaX::Demo::JSONParser.
 
+1.06  Sun Aug 31 09:12:00 2014
+	- Add data/json.3.bfn, Jeffrey Kegler's latest grammar, which uses MarpaX::Simple.
+	- Modify JSONParser.pm code to use MarpaX::Simple. Modify the Synopsis to match the new demo.pl.
+	- Update the docs in various ways.
+	- Modify scripts/demo.pl to handle Marpa exceptions more cleanly.
+	- Update pre-reqs to use Marpa::R2 V 2.091, and MarpaX::Simple V 0.03.
+	- Fix bug in scripts/find.grammars.pl, which still only looked for json.1.bnf.
+
 1.05  Sat Feb 22 17:44:00 2014
 	- Add 'lexeme default = latm => 1' to the grammar.
 	- Make V 2.082 the minimum version for Marpa::R2.
