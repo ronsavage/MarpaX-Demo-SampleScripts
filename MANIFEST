@@ -21,5 +21,6 @@ scripts/demo.pl
 scripts/find.grammars.pl
 share/json.1.bnf
 share/json.2.bnf
+share/json.3.bnf
 t/basic.tests.t
 xt/author/pod.t
