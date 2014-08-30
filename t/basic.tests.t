@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 use MarpaX::Demo::JSONParser;
 
 use Path::Tiny; # For path().
@@ -22,6 +25,10 @@ sub run_test
 	try
 	{
 		$result = MarpaX::Demo::JSONParser -> new(bnf_file => $bnf_file) -> parse($string);
+	}
+	catch
+	{
+		diag "$string. Marpa error: $_";
 	};
 
 	$count++;
@@ -34,55 +41,72 @@ sub run_test
 
 sub run_tests
 {
-	my($bnf_file) = @_;
-	$bnf_file     = "$bnf_file"; # See Path::Tiny :-(.
+	my($count, $bnf_file) = @_;
+	$bnf_file = "$bnf_file"; # See Path::Tiny :-(.
 
-	$data = run_test($bnf_file, '{[}');
-	is($data, undef, "$bnf_file. Expect parse to die");
+	$count++;
+	my($data) = run_test($bnf_file, '{[}');
+	is($data, undef, "$count: $bnf_file. Expect parse to die");
 
+	$count++;
 	$data = run_test($bnf_file, '{"["}');
-	is($data, undef, "$bnf_file. Expect parse to die");
+	is($data, undef, "$count: $bnf_file. Expect parse to die");
 
+	$count++;
 	$data = run_test($bnf_file, '{[[}');
-	is($data, undef, "$bnf_file. Expect parse to die");
+	is($data, undef, "$count: $bnf_file. Expect parse to die");
 
+	$count++;
 	$data = run_test($bnf_file, '{"[["}');
-	is($data, undef, "$bnf_file. Expect parse to die");
+	is($data, undef, "$count: $bnf_file. Expect parse to die");
 
+	$count++;
 	$data = run_test($bnf_file, '{');
-	is($data, undef, "$bnf_file. Expect parse to die");
+	is($data, undef, "$count: $bnf_file. Expect parse to die");
 
+	$count++;
 	$data = run_test($bnf_file, '"a');
-	is($data, undef, "$bnf_file. Expect parse to die");
+	is($data, undef, "$count: $bnf_file. Expect parse to die");
 
-	my $data = run_test($bnf_file, '{"test":"1"}');
-	is($$data{test}, 1, "$bnf_file. Expect parse to succeed");
+	$count++;
+	$data = run_test($bnf_file, '{"test":"1"}');
+	is($$data{test}, 1, "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, '{"test":[1,2,3]}');
-	is_deeply($$data{test}, [1,2,3], "$bnf_file. Expect parse to succeed");
+	is_deeply($$data{test}, [1,2,3], "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, '{"test":true}');
-	is($$data{test}, 1, "$bnf_file. Expect parse to succeed");
+	is($$data{test}, 1, "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, '{"test":false}');
-	is($$data{test}, '', "$bnf_file. Expect parse to succeed");
+	is($$data{test}, '', "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, '{"test":null}');
-	is($$data{test}, undef, "$bnf_file. Expect parse to succeed");
+	is($$data{test}, undef, "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, '{"test":null, "test2":"hello world"}');
-	is($$data{test}, undef, "$bnf_file. Expect parse to succeed");
-	is($data->{test2}, "hello world", "$bnf_file. Expect parse to succeed");
+	is($$data{test}, undef, "$count: $bnf_file. Expect parse to succeed");
+	$count++;
+	is($data->{test2}, "hello world", "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, '{"test":"1.25"}');
-	is($$data{test}, '1.25', "$bnf_file. Expect parse to succeed");
+	is($$data{test}, '1.25', "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, '{"test":"1.25e4"}');
-	is($$data{test}, '1.25e4', "$bnf_file. Expect parse to succeed");
+	is($$data{test}, '1.25e4', "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, '[]');
-	is_deeply($data, [], "$bnf_file. Expect parse to succeed");
+	is_deeply($data, [], "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, <<'JSON');
 	[
 	      {
@@ -115,8 +139,9 @@ JSON
 	    { "precision" => "zip", Longitude => "-122.026020", Address => "",
 	      City => "SUNNYVALE", Country => "US", Latitude => "37.371991",
 	      Zip => 94085, State => "CA" }
-	], "$bnf_file. Expect parse to succeed");
+	], "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, <<'JSON');
 	{
 	    "Image": {
@@ -144,8 +169,9 @@ JSON
 	        },
 	        "IDs" => [ 116, 943, 234, 38793 ],
 	    }
-	}, "$bnf_file. Expect parse to succeed");
+	}, "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, <<'JSON');
 	{
 	    "source" : "<a href=\"http://janetter.net/\" rel=\"nofollow\">Janetter</a>",
@@ -218,27 +244,31 @@ JSON
 	        "id" => 16010789,
 	        "verified" => '' # false.
 	    }
-	}, "$bnf_file. Expect parse to succeed");
+	}, "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, <<'JSON');
 	{ "test":  "\u2603" }
 JSON
 
-	is($$data{test}, "\x{2603}", "$bnf_file. Expect parse to succeed");
+	is($$data{test}, "\x{2603}", "$count: $bnf_file. Expect parse to succeed");
 
+	$count++;
 	$data = run_test($bnf_file, <<'JSON');
 	{ "test":  "éáóüöï" }
 JSON
 
-	is($$data{test}, "éáóüöï", "$bnf_file. Expect parse to succeed");
+	is($$data{test}, "éáóüöï", "$count: $bnf_file. Expect parse to succeed");
 
 } # End of run_tests;
 
 # ------------------------------------------------
 
-for (qw/json.1.bnf json.2.bnf/)
+my($count) = 0;
+
+for (qw/json.1.bnf json.2.bnf json.3.bnf/)
 {
-	run_tests(path('share', $_) );
+	run_tests($count, path('share', $_) );
 }
 
 print "# Internal test count: $count. \n";
