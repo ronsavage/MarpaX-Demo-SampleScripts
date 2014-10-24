@@ -14,19 +14,18 @@ use Try::Tiny;
 sub run_one
 {
 	my($script) = @_;
-
-	my($stdout, $stderr);
+	my($result) = 'OK';
 
 	try
 	{
-		($stdout, $stderr) = capture{"$^X $script"};
-
-		ok(1, "Script $script ran");
+		my($stdout, $stderr) = capture{"$^X $script"};
 	}
 	catch
 	{
-		diag "Script $script died: $_\n";
+		$result = $_;
 	};
+
+	ok($result eq 'OK', "Script $script");
 
 } # End of run_one.
 
