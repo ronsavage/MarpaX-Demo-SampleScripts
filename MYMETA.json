@@ -26,8 +26,10 @@
       },
       "runtime" : {
          "requires" : {
+            "Capture::Tiny" : "0.25",
             "Data::Dumper" : "2.145",
             "Data::Section" : "0.200006",
+            "File::Slurp" : "9999.19",
             "Marpa::R2" : "2.096",
             "Marpa::R2::HTML" : "2.096",
             "Moo" : "1.006001",
@@ -37,6 +39,7 @@
             "charnames" : "0",
             "diagnostics" : "0",
             "open" : "0",
+            "perl" : "5.01",
             "strict" : "0",
             "utf8" : "0",
             "warnings" : "0"
