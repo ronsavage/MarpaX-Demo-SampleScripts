@@ -7,6 +7,8 @@ use HTML::WikiConverter;
 
 use Marpa::R2::HTML 'html';
 
+# Author: Jeffrey Kegler.
+
 #--------------------------
 
 sub fix_tags

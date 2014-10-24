@@ -7,6 +7,8 @@ use warnings;
 use Marpa::R2 2.082000;
 use Marpa::R2::HTML qw(html);
 
+# Author: Jeffrey Kegler.
+
 # ---------------------------
 
 # The strategy is based on a values view

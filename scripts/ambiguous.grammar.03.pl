@@ -8,6 +8,8 @@ use Data::Dumper;
 
 use Marpa::R2;
 
+# Author: Unknown.
+
 # -----------------------------------------------
 
 # http://velocity.apache.org/engine/releases/velocity-1.4/specification-bnf.html

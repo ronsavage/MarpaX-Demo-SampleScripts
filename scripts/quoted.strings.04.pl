@@ -26,6 +26,8 @@ has recce =>
 
 our @fields;
 
+# Author: Ron Savage.
+
 # --------------------------------------------------
 
 sub clean_after

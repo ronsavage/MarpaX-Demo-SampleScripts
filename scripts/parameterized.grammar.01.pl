@@ -11,6 +11,8 @@ use POSIX qw/EXIT_SUCCESS/;
 
 use Marpa::R2;
 
+# Author: Jean-Damien Durand.
+
 # ------------------------------------------------
 
 #

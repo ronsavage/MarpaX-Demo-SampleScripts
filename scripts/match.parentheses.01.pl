@@ -11,6 +11,10 @@ $Data::Dumper::Deepcopy = 1;
 
 use Marpa::R2;
 
+# Author: Unknown.
+
+# ------------------------------------------------
+
 my $g = Marpa::R2::Scanless::G->new( { source => \(<<'END_OF_SOURCE'),
 
 :default ::= action => [ name, values ]

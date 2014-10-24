@@ -8,7 +8,7 @@ use Marpa::R2;
 
 use Try::Tiny;
 
-# Author: rns
+# Author: rns (Ruslan Shvedov).
 # See https://groups.google.com/forum/#!topic/marpa-parser/kthX_WUfE_o.
 # Adapted from balanced parens example in
 # http://marvin.cs.uidaho.edu/Teaching/CS445/grammar.html
