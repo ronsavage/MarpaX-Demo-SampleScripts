@@ -53,23 +53,22 @@ See scripts/*.pl.
 
 =head1 Description
 
-C<MarpaX::Demo::JSONParser> demonstrates 2 grammars for parsing JSON.
+C<MarpaX::Demo::SampleScripts> demonstrates various grammars and various ways to write and test
+scripts.
 
-Only 1 grammar is loaded per run, as specified by the C<bnf_file> option to C<< new() >>.
-
-See t/basic.tests.t for sample code.
+The whole point of this module is in scripts/*.pl.
 
 =head1 Installation
 
-Install C<MarpaX::Demo::JSONParser> as you would for any C<Perl> module:
+Install C<MarpaX::Demo::SampleScripts> as you would for any C<Perl> module:
 
 Run:
 
-	cpanm MarpaX::Demo::JSONParser
+	cpanm MarpaX::Demo::SampleScripts
 
 or run:
 
-	sudo cpan MarpaX::Demo::JSONParser
+	sudo cpan MarpaX::Demo::SampleScripts
 
 or unpack the distro, and then either:
 
@@ -87,181 +86,135 @@ or:
 
 =head1 Constructor and Initialization
 
-C<new()> is called as C<< my($parser) = MarpaX::Demo::JSONParser -> new(k1 => v1, k2 => v2, ...) >>.
+C<new()> is called as C<< my($parser) = MarpaX::Demo::SampleScripts -> new(k1 => v1, k2 => v2, ...) >>.
 
-It returns a new object of type C<MarpaX::Demo::JSONParser>.
+It returns a new object of type C<MarpaX::Demo::SampleScripts>.
 
-Key-value pairs accepted in the parameter list (see corresponding methods for details
-[e.g. bnf_file([$string])]):
+Key-value pairs accepted in the parameter list:
 
 =over 4
 
-=item o bnf_file aUserGrammarFileName
-
-Specify the name of the file containing your Marpa::R2-style grammar.
-
-See data/json.1.bnf, data/json.2.bnf and data/json.3.bnf for the cases handled by the code.
-
-This option is mandatory.
-
-Default: ''.
+(None).
 
 =back
 
 =head1 Methods
 
-=head2 parse($string)
+=head2 run()
 
-Parses the given $string using the grammar whose file name was provided by the C<bnf_file> option to
-C<< new() >>.
-
-Dies if the parse fails, or returns the result of the parse if it succeeded.
+This method does nothing, and return 0 for success.
 
 =head1 Files Shipped with this Module
 
-=head2 Data Files
+=head2 Runnable Scripts
 
-These JSON grammars are discussed in the L</FAQ> below.
+All these scripts are in the scripts/ directory.
 
 =over 4
 
-=item o share/json.1.bnf
+=item o ambiguous.grammar.03.pl
 
-This JSON grammar was devised by Peter Stuifzand.
+A grammar for the
+L<Velocity|http://velocity.apache.org/engine/releases/velocity-1.4/specification-bnf.html> language.
 
-=item o share/json.2.bnf
+=item o grammar.inspector.01.pl
 
-This JSON grammar was devised by Jeffrey Kegler.
+Display Marpa's view of the structure of a grammar.
 
-=item o share/json.3.bnf
+=item o html.02.pl
 
-This JSON grammar was devised by Jeffrey Kegler.
+Process defective HTML.
+
+=item o match.parentheses.01.pl
+
+Match nested parantheses, i.e. the '(' and ')' pair.
+
+=item o parmaterized.grammar.01.pl
+
+Handle parts of the grammar as strings, and interpolate various things into those strings, before
+using them to build the final grammar.
+
+=item o quoted.strings.01.pl
+
+=over 4
+
+=item o Handle events
+
+=item o Handle utf8 input
+
+=item o Handle doublequoted strings
+
+=item o Handle single-quoted strings
 
 =back
 
-=head2 Scripts
+=item o quoted.strings.02.pl
+
+Handle nested, double-quoted, strings.
+
+=item o quoted.strings.03.pl
+
+Handle strings quoted with various characters, and with escaped characters in there too.
+
+=item o quoted.strings.04.pl
 
 =over 4
 
-=item o scripts/demo.pl
+=item o Handle strings containing escaped characters
 
-This program is exactly what is displayed in the L</Synopsis> above.
+=item o Handle events
 
-Before installation of this module, run it with:
+=item o Handle unquoted strings
 
-	shell> perl -Ilib scripts/demo.pl
+=item o Handle doublequoted strings
 
-And after installation, just use:
+=item o Handle single-quoted strings
 
-	shell> perl scripts/demo.pl
+=back
 
-=item o scripts/find.grammars.pl
+=item o use.utf8.01.pl
 
-After installation of the module, run it with:
+=over 4
 
-	shell> perl scripts/find.grammars.pl (Defaults to json.1.bnf)
-	shell> perl scripts/find.grammars.pl json.1.bnf
+=item o Handle events
 
-Or use json.2.bnf or json.2.bnf.
+=item o Handle utf8 input
 
-It will print the name of the path to given grammar file.
+=item o Handle unquoted strings
+
+=item o Handle doublequoted strings
+
+=item o Handle single-quoted strings
+
+=back
+
+=back
+
+=head2 Un-runnable Scripts
+
+All these scripts are in the examples/ directory.
+
+=over 4
+
+=item o ambiguous.grammar.01.pl
+
+Contains both ambiguous and un-ambiguous grammars.
+
+Uses MarpaX::ASF::PFG, which is not on MetaCPAN.
+
+=item o html.01.pl
+
+Processes HTML.
+
+Uses L<HTML::WikiConverter>, which won't install without patches, and which the author apparently
+refuses to fix.
+
+=item o match.keywords.pl
+
 
 =back
 
 =head1 FAQ
-
-=head2 Where are the grammar files actually installed?
-
-They are not installed (when the source code is) under V 1.00.
-
-From V 1.01 on, I use L<File::ShareDir> and L<Module::Install> to install them.
-
-This a complex topic. Here are some of the issues:
-
-=over 4
-
-=item o Module::Install makes it hard to update *META.* after you update the module's version #
-
-It puts them in the dist but not in the current directory (alongside Makefile.PL, etc).
-
-=item o Install in the user's home directory, using L<File::HomeDir>
-
-Problem: Some CPAN testers run with accounts which don't have home directories.
-
-I have used L<File::HomeDir> when shipping modules, but that problem means I switched to L<File::ShareDir>. But...
-
-=item o Install in a shared directory, using L<File::ShareDir>
-
-Problem: Using L<File::ShareDir> requires L<Module::Install> during installation.
-
-The latter has 77 bugs on RT, although some of them may have been fixed.
-
-Problem: Using L<File::ShareDir> requires using Makefile.PL rather that my preferred choice Build.PL.
-
-Sigh.
-
-Problem: Using L<File::ShareDir> means the grammar files will be installed many directories deep.
-
-Again, this is something I don't like doing. On my machine, there are 13 dir names listed when I run
-scripts/find.grammars.pl.
-
-Problem: Using L<Module::Install> by itself does not support author tests.
-
-That needs L<Module::Install::AuthorTests>.
-
-=back
-
-Depite all this, for V 1.01 I've used L<File::ShareDir>. And you can now run:
-
-	shell> perl scripts/find.grammars.pl
-
-This reports the directory into which the grammars were installed.
-
-=head2 Which JSON BNF is best?
-
-This is not really a fair question. They were developed under different circumstances.
-
-=over 4
-
-=item o json.1.bnf is by Peter Stuifzand.
-
-json.1.bnf is the first attempt, when the Marpa SLIF still did not handle utf8. And it's meant to be a practical
-grammar. The sophisticated test suite is his, too.
-
-=item o json.2.bnf is by Jeffrey Kegler, the author of L<Marpa::R2>.
-
-json.2.bnf was written later, after Jeffey had a chance to study json.1.bnf. He used it to help optimise Marpa,
-but with a minimal test suite, so it had a different purpose.
-
-I (Ron) converted their code into forms suitable for building this module.
-
-=item o json.3.bnf is by Jeffrey Kegler.
-
-He developed this in August, 2014, after recent significant progress in the writing of Marpa.
-
-=head2 Where is Marpa's Homepage?
-
-L<http://savage.net.au/Marpa.html>.
-
-=head2 Are there any articles discussing Marpa?
-
-Yes, many by its author, and several others. See Marpa's homepage, just above, and:
-
-L<The Marpa Guide|http://marpa-guide.github.io/>, (in progress, by Peter Stuifzand and Ron Savage).
-
-L<Parsing a here doc|http://peterstuifzand.nl/2013/04/19/parse-a-heredoc-with-marpa.html>, by Peter Stuifzand.
-
-L<An update of parsing here docs|http://peterstuifzand.nl/2013/04/22/changes-to-the-heredoc-parser-example.html>, by Peter Stuifzand.
-
-L<Conditional preservation of whitespace|http://savage.net.au/Ron/html/Conditional.preservation.of.whitespace.html>, by Ron Savage.
-
-=head1 See Also
-
-L<MarpaX::Demo::StringParser>.
-
-L<MarpaX::Grammar::Parser>.
-
-L<MarpaX::Languages::C::AST>.
 
 =head1 Machine-Readable Change Log
 
@@ -275,17 +228,19 @@ Version numbers < 1.00 represent development versions. From 1.00 up, they are pr
 
 Email the author, or log a bug on RT:
 
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=MarpaX::Demo::JSONParser>.
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=MarpaX::Demo::SampleScripts>.
 
 =head1 Author
 
-L<MarpaX::Demo::JSONParser> was written by Ron Savage I<E<lt>ron@savage.net.auE<gt>> in 2013.
+L<MarpaX::Demo::SampleScripts> was written by Ron Savage I<E<lt>ron@savage.net.auE<gt>> in 2014.
 
-Home page: L<http://savage.net.au/>.
+Marpa's homepage: <http://savage.net.au/Marpa.html>.
+
+Homepage: L<http://savage.net.au/>.
 
 =head1 Copyright
 
-Australian copyright (c) 2013, Ron Savage.
+Australian copyright (c) 2014, Ron Savage.
 
 	All Programs of mine are 'OSI Certified Open Source Software';
 	you can redistribute them and/or modify them under the terms of
