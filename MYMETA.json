@@ -1,5 +1,5 @@
 {
-   "abstract" : "A JSON parser with a choice of grammars",
+   "abstract" : "A collection of scripts using Marpa::R2",
    "author" : [
       "Ron Savage <ron@savage.net.au>"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "MarpaX-Demo-JSONParser",
+   "name" : "MarpaX-Demo-SampleScripts",
    "prereqs" : {
       "build" : {
          "requires" : {
@@ -47,20 +47,19 @@
       }
    },
    "provides" : {
-      "MarpaX::Demo::JSONParser" : {
-         "file" : "lib/MarpaX/Demo/JSONParser.pm",
-         "version" : "1.03"
-      },
-      "MarpaX::Demo::JSONParser::Actions" : {
-         "file" : "lib/MarpaX/Demo/JSONParser/Actions.pm",
-         "version" : "1.03"
+      "MarpaX::Demo::SampleScripts" : {
+         "file" : "lib/MarpaX/Demo/SampleScripts.pm",
+         "version" : "1.00"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "license" : [
-         "http://www.perlfoundation.org/artistic_license_2_0"
-      ]
+         "http://opensource.org/licenses/artistic-license-2.0.php"
+      ],
+      "repository" : {
+         "url" : "https://github.com/ronsavage/MarpaX-Demo-SampleScripts"
+      }
    },
-   "version" : "1.03"
+   "version" : "1.00"
 }

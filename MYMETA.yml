@@ -1,5 +1,5 @@
 ---
-abstract: 'A JSON parser with a choice of grammars'
+abstract: 'A collection of scripts using Marpa::R2'
 author:
   - 'Ron Savage <ron@savage.net.au>'
 build_requires:
@@ -12,14 +12,11 @@ license: artistic_2
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: '1.4'
-name: MarpaX-Demo-JSONParser
+name: MarpaX-Demo-SampleScripts
 provides:
-  MarpaX::Demo::JSONParser:
-    file: lib/MarpaX/Demo/JSONParser.pm
-    version: '1.03'
-  MarpaX::Demo::JSONParser::Actions:
-    file: lib/MarpaX/Demo/JSONParser/Actions.pm
-    version: '1.03'
+  MarpaX::Demo::SampleScripts:
+    file: lib/MarpaX/Demo/SampleScripts.pm
+    version: '1.00'
 requires:
   Capture::Tiny: '0.25'
   Data::Dumper: '2.145'
@@ -39,5 +36,6 @@ requires:
   utf8: '0'
   warnings: '0'
 resources:
-  license: http://www.perlfoundation.org/artistic_license_2_0
-version: '1.03'
+  license: http://opensource.org/licenses/artistic-license-2.0.php
+  repository: https://github.com/ronsavage/MarpaX-Demo-SampleScripts
+version: '1.00'
