@@ -106,6 +106,10 @@ This method does nothing, and return 0 for success.
 
 =head1 Files Shipped with this Module
 
+Many of these scripts are gists, i.e. from https://gist.github.com/. You can always go there are
+search for some I<unique> text within the script, to see if there are other versions, or commentary
+available.
+
 =head2 Runnable Scripts
 
 All these scripts are in the scripts/ directory.
