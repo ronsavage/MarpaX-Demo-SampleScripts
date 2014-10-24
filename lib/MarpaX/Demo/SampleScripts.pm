@@ -1,265 +1,41 @@
-package MarpaX::Demo::JSONParser;
+package MarpaX::Demo::SampleScripts;
 
+use 5.010;
+use diagnostics;
 use strict;
+use utf8;
 use warnings;
+use warnings  qw(FATAL utf8);    # Fatalize encoding glitches.
+use open      qw(:std :utf8);    # Undeclared streams in UTF-8.
+use charnames qw(:full :short);  # Unneeded in v5.16.
 
-use File::Basename; # For basename.
-use File::Slurp;    # For read_file().
+use Data::Dumper;
+use Data::Section;
 
 use Marpa::R2;
-
-use MarpaX::Demo::JSONParser::Actions;
-use MarpaX::Simple qw(gen_parser);
+use Marpa::R2::HTML;
 
 use Moo;
 
-has base_name =>
-(
-	default  => sub {return ''},
-	is       => 'rw',
-#	isa      => 'Str',
-	required => 0,
-);
+use POSIX;
 
-has bnf_file =>
-(
-	default  => sub {return ''},
-	is       => 'rw',
-#	isa      => 'Str',
-	required => 1,
-);
+use Try::Tiny;
 
-has grammar =>
-(
-	default  => sub {return ''},
-	is       => 'rw',
-#	isa      => 'Marpa::R2::Scanless::G',
-	required => 0,
-);
+use Types::Standard qw/Any ArrayRef HashRef Int Str/;
 
-has parser =>
-(
-	default  => sub {return ''},
-	is       => 'rw',
-#	isa      => 'Marpa::R2::Scanless::G',
-	required => 0,
-);
-
-has scanner =>
-(
-	default  => sub {return ''},
-	is       => 'rw',
-#	isa      => 'Marpa::R2::Scanless::R',
-	required => 0,
-);
-
-our $VERSION = '1.06';
+our $VERSION = '1.00';
 
 # ------------------------------------------------
 
-sub BUILD
+sub run
 {
 	my($self) = @_;
-	my $bnf   = read_file($self -> bnf_file, binmode => ':utf8');
 
-	$self -> base_name(basename($self -> bnf_file) );
+	# Return 0 for success and 1 for failure.
 
-	if ($self -> base_name eq 'json.1.bnf')
-	{
-		$self-> grammar
-		(
-			Marpa::R2::Scanless::G -> new
-			({
-				default_action => 'do_first_arg',
-				source         => \$bnf,
-			})
-		)
-	}
-	elsif ($self -> base_name eq 'json.2.bnf')
-	{
-		$self-> grammar
-		(
-			Marpa::R2::Scanless::G -> new
-			({
-				bless_package => 'MarpaX::Demo::JSONParser::Actions',
-				source        => \$bnf,
-			})
-		)
-	}
-	elsif ($self -> base_name eq 'json.3.bnf')
-	{
-		$self-> parser
-		(
-			gen_parser
-			(
-				grammar => $bnf,
-			)
-		);
-	}
-	else
-	{
-		die "Unknown BNF. Use either 'json.[123].bnf'\n";
-	}
+	return 0;
 
-	if ($self -> base_name ne 'json.3.bnf')
-	{
-		$self -> scanner
-		(
-			Marpa::R2::Scanless::R -> new
-			({
-				grammar           => $self -> grammar,
-				semantics_package => 'MarpaX::Demo::JSONParser::Actions',
-			})
-		);
-	}
-
-} # End of BUILD.
-
-# ------------------------------------------------
-
-sub decode_string
-{
-	my ($self, $s) = @_;
-
-	$s =~ s/\\u([0-9A-Fa-f]{4})/chr(hex($1))/eg;
-	$s =~ s/\\n/\n/g;
-	$s =~ s/\\r/\r/g;
-	$s =~ s/\\b/\b/g;
-	$s =~ s/\\f/\f/g;
-	$s =~ s/\\t/\t/g;
-	$s =~ s/\\\\/\\/g;
-	$s =~ s{\\/}{/}g;
-	$s =~ s{\\"}{"}g;
-
-	return $s;
-
-} # End of decode_string.
-
-# ------------------------------------------------
-
-sub eval_json
-{
-	my($self, $thing) = @_;
-	my($type) = ref $thing;
-
-	if ($type eq 'REF')
-	{
-		return \$self -> eval_json( ${$thing} );
-	}
-	elsif ($type eq 'ARRAY')
-	{
-		return [ map { $self -> eval_json($_) } @{$thing} ];
-	}
-	elsif ($type eq 'MarpaX::Demo::JSONParser::Actions::string')
-	{
-		my($string) = substr $thing->[0], 1, -1;
-
-		return $self -> decode_string($string) if ( index $string, '\\' ) >= 0;
-		return $string;
-	}
-	elsif ($type eq 'MarpaX::Demo::JSONParser::Actions::hash')
-	{
-		return { map { $self -> eval_json( $_->[0] ), $self -> eval_json( $_->[1] ) } @{ $thing->[0] } };
-	}
-
-	return 1  if $type eq 'MarpaX::Demo::JSONParser::Actions::true';
-	return '' if $type eq 'MarpaX::Demo::JSONParser::Actions::false';
-	return $thing;
-
-} # End of eval_json.
-
-# ------------------------------------------------
-
-sub parse
-{
-	my($self, $string) = @_;
-
-	if ($self -> base_name eq 'json.3.bnf')
-	{
-		my $parse_value = $self -> parser -> ($string);
-
-		return $self -> post_process(@{$parse_value});
-	}
-	else
-	{
-		$self -> scanner -> read(\$string);
-
-		my($value_ref) = $self -> scanner -> value;
-
-		die "Parse failed\n" if (! defined $value_ref);
-
-		$value_ref = $self -> eval_json($value_ref) if ($self -> base_name eq 'json.2.bnf');
-
-		return $$value_ref;
-	}
-
-} # End of parse.
-
-# ------------------------------------------------
-
-sub post_process
-{
-	my ($self, $type, @value) = @_;
-
-	return $value[0] if $type eq 'number';
-	return undef if $type eq 'null';
-	return $value[0] if $type eq 'easy string';
-	return $self -> unescape($value[0]) if $type eq 'any char';
-	return chr(hex(substr($value[0],2))) if $type eq 'hex char';
-	return 1 if $type eq 'true';
-	return q{} if $type eq 'false';
-
-	if ($type eq 'array')
-	{
-		my @result = ();
-		push @result, $self -> post_process(@{$_}) for @{$value[0]};
-
-		return \@result;
-	}
-
-	if ($type eq 'hash')
-	{
-		my %result = ();
-
-		for my $pair (@{$value[0]})
-		{
-			my $key = $self -> post_process(@{$pair->[0]});
-			$result{$key} = $self -> post_process(@{$pair->[1]});
-		}
-
-		return \%result;
-	}
-
-	if ($type eq 'string')
-	{
-		return join q{}, map { $self -> post_process( @{$_} ) } @{$value[0]};
-	}
-
-	die join q{ }, 'post process failed:', $type, @value;
-
-} # End of post_process.
-
-# ------------------------------------------------
-
-sub unescape
-{
-	my($self, $char) = @_;
-
-	return "\b" if $char eq 'b';
-	return "\f" if $char eq 'f';
-	return "\n" if $char eq 'n';
-	return "\r" if $char eq 'r';
-	return "\t" if $char eq 't';
-	return '/'  if $char eq '/';
-	return '\\' if $char eq '\\';
-	return '"'  if $char eq '"';
-
-	# If the character is not legal, return it anyway
-	# As an alternative, we could fail here.
-
-	return $char;
-
-} # End of unescape.
+} # End of run.
 
 # ------------------------------------------------
 
@@ -269,49 +45,11 @@ sub unescape
 
 =head1 NAME
 
-C<MarpaX::Demo::JSONParser> - A JSON parser with a choice of grammars
+C<MarpaX::Demo::SampleScripts> - A collection of scripts using Marpa::R2
 
 =head1 Synopsis
 
-	#!/usr/bin/env perl
-
-	use strict;
-	use warnings;
-
-	use File::ShareDir;
-
-	use MarpaX::Demo::JSONParser;
-
-	use Try::Tiny;
-
-	my($app_name) = 'MarpaX-Demo-JSONParser';
-	my($bnf_name) = 'json.1.bnf'; # Or 'json.2.bnf'. See scripts/find.grammars.pl below.
-	my($bnf_file) = File::ShareDir::dist_file($app_name, $bnf_name);
-	my($string)   = '{"test":"1.25e4"}';
-
-	my($message);
-	my($result);
-
-	# Use try to catch die.
-
-	try
-	{
-		$message = '';
-		$result  = MarpaX::Demo::JSONParser -> new(bnf_file => $bnf_file) -> parse($string);
-	}
-	catch
-	{
-		$message = $_;
-		$result  = 0;
-	};
-
-	print $result ? "Result: test => $$result{test}. Expect: 1.25e4. \n" : "Parse failed. $message";
-
-This script ships as scripts/demo.pl.
-
-You can test failure by deleting the '{' character in line 17 of demo.pl and re-running it.
-
-See also t/basic.tests.t for more sample code.
+See scripts/*.pl.
 
 =head1 Description
 

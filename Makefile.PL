@@ -1,34 +1,78 @@
+use strict;
+use warnings;
+
 use ExtUtils::MakeMaker;
 
-use inc::Module::Install;
+# See lib/ExtUtils/MakeMaker.pm for details of how to influence
+# the contents of the Makefile that is written.
 
-# -----------------------------------------------
+my(%params) =
+(
+	($] ge '5.005') ?
+	(
+		AUTHOR   => 'Ron Savage (ron@savage.net.au)',
+		ABSTRACT => 'A collection of scripts using Marpa::R2',
+	) : (),
+	clean =>
+	{
+		FILES => 'blib/* Makefile MANIFEST MarpaX-Demo-StringParser-*'
+	},
+	dist =>
+	{
+		COMPRESS => 'gzip',
+		SUFFIX   => 'gz'
+	},
+	DISTNAME  => 'MarpaX-Demo-SampleScripts',
+	NAME      => 'MarpaX::Demo::SampleScripts',
+	LICENSE   => 'artistic_2',
+	PL_FILES  => {},
+	PREREQ_PM =>
+	{
+		'charnames'       => 0,
+		'Data::Dumper'    => 2.145,
+		'Data::Section'   => 0.200006,
+		'diagnostics'     => 0,
+		'Marpa::R2'       => 2.096000,
+		'Marpa::R2::HTML' => 2.096000,
+		'Moo'             => 1.006001,
+		'open'            => 0,
+		'POSIX'           => 1.32,
+		'strict'          => 0,
+		'Test::More'      => 0.94,
+#		'Test::Pod'       => 1.45, # Make it optional. See xt/author/pod.t.
+		'Try::Tiny'       => 0.22,
+		'Types::Standard' => 1.000004,
+		'utf8'            => 0,
+		'warnings'        => 0,
+	},
+	VERSION_FROM => 'lib/MarpaX/Demo/StringParser.pm',
+);
 
-name 'MarpaX-Demo-JSONParser';
+if ( ($ExtUtils::MakeMaker::VERSION =~ /^\d\.\d\d$/) && ($ExtUtils::MakeMaker::VERSION > 6.30) )
+{
+	$params{LICENSE} = 'artistic_2';
+}
 
-license 'artistic_2';
+if ($ExtUtils::MakeMaker::VERSION ge '6.46')
+{
+	$params{META_MERGE} =
+	{
+		'meta-spec' =>
+		{
+			version => 2,
+		},
+		resources   =>
+		{
+			bugtracker => 'https://rt.cpan.org/Public/Dist/Display.html?Name=MarpaX-Demo-SampleScripts',
+			license    => 'http://opensource.org/licenses/Artistic-2.0',
+			repository =>
+			{
+				type => 'git',
+				url  => 'https://github.com/ronsavage/MarpaX-Demo-SampleScripts.git',
+				web  => 'https://github.com/ronsavage/MarpaX-Demo-SampleScripts',
+			},
+		},
+	};
+}
 
-perl_version '5.014000';
-
-all_from 'lib/MarpaX/Demo/JSONParser.pm';
-
-install_share;
-
-requires 'File::Basename' => 2.82;
-requires 'File::ShareDir' => 1.03;
-requires 'File::Slurp'    => 0.051003;
-requires 'Marpa::R2'      => 2.091000;
-requires 'MarpaX::Simple' => 0.03,
-requires 'Moo'            => 1.002000;
-requires 'Path::Tiny'     => 0.025;
-requires 'strict'         => 0;
-requires 'Try::Tiny'      => 0.16;
-requires 'warnings'       => 0;
-
-test_requires 'Test::Exception' => 0.31;
-test_requires 'Test::More'      => 0.98;
-#test_requires 'Test::Pod'      => 1.45; # Make it optional. See t/pod.t
-
-recursive_author_tests('xt');
-
-WriteAll;
+WriteMakefile(%params);
