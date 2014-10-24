@@ -46,14 +46,17 @@ $class -> new
 	},
 	requires =>
 	{
+		'Capture::Tiny'   => 0.25,
 		'charnames'       => 0,
 		'Data::Dumper'    => 2.145,
 		'Data::Section'   => 0.200006,
 		'diagnostics'     => 0,
+		'File::Slurp'     => 9999.19,
 		'Marpa::R2'       => 2.096000,
 		'Marpa::R2::HTML' => 2.096000,
 		'Moo'             => 1.006001,
 		'open'            => 0,
+		'perl'            => 5.010,
 		'POSIX'           => 1.32,
 		'strict'          => 0,
 		'Try::Tiny'       => 0.22,

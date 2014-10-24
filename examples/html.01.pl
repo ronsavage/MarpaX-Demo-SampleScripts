@@ -1,6 +1,5 @@
 #!/usr/bin/env perl
 
-use feature 'say';
 use strict;
 use warnings;
 
@@ -28,18 +27,16 @@ my($valid_html)    = ${html( \$original_html, {'*' => \&fix_tags})};
 my($dialect)       = shift || 'DokuWiki';
 my($converter)     = HTML::WikiConverter -> new(dialect => $dialect);
 
-say 'Original HTML: ';
-say '-'x 50;
-say $original_html;
-say '-'x 50;
-say 'Valid HTML: ';
-say '-'x 50;
-say $valid_html;
-say '-'x 50;
-say "$dialect: ";
-say '-'x 50;
-say $converter -> html2wiki(html => $original_html);
-say '-'x 50;
-
-__END__
+print "Original HTML: \n";
+print '-' x 50, "\n";
+print "$original_html\n";
+print '-' x 50, "\n";
+print "Valid HTML: \n";
+print '-' x 50, "\n";
+print "$valid_html\n";
+print '-' x 50, "\n";
+print "$dialect: \n";
+print '-' x 50, "\n";
+print $converter -> html2wiki(html => $original_html), "\n";
+print '-' x 50;
 
