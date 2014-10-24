@@ -11,7 +11,7 @@ $Data::Dumper::Deepcopy = 1;
 
 use Marpa::R2;
 
-# Author: Unknown.
+# Author: rns (Ruslan Shvedov).
 
 # ------------------------------------------------
 

@@ -8,7 +8,7 @@ use Data::Dumper;
 
 use Marpa::R2;
 
-# Author: Unknown.
+# Author: rns (Ruslan Shvedov).
 
 # -----------------------------------------------
 
