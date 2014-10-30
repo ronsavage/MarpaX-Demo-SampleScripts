@@ -240,7 +240,7 @@ L<MarpaX::Demo::SampleScripts> was written by Ron Savage I<E<lt>ron@savage.net.a
 
 Marpa's homepage: <http://savage.net.au/Marpa.html>.
 
-Homepage: L<http://savage.net.au/>.
+My homepage: L<http://savage.net.au/>.
 
 =head1 Copyright
 
