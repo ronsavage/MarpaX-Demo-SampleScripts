@@ -17,6 +17,7 @@ scripts/ambiguous.grammar.03.pl
 scripts/grammar.inspector.01.pl
 scripts/html.02.pl
 scripts/match.parentheses.01.pl
+scripts/match.parentheses.02.pl
 scripts/parameterized.grammar.01.pl
 scripts/quoted.strings.01.pl
 scripts/quoted.strings.02.pl
