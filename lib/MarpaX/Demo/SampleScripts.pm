@@ -23,7 +23,7 @@ use Try::Tiny;
 
 use Types::Standard qw/Any ArrayRef HashRef Int Str/;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 # ------------------------------------------------
 
@@ -132,6 +132,20 @@ Process defective HTML.
 =item o match.parentheses.01.pl
 
 Match nested parantheses, i.e. the '(' and ')' pair.
+
+=item o match.parentheses.02.pl
+
+This sophisticated example checks files for matching brackets: (){}[].
+
+Or, it can be run (self-tested) with the '--test' option'.
+
+The new rejection events are used, along with the Ruby Slippers, meaning it requires L<Marpa::R2>
+V 2.098000.
+
+This program uses the method of adding known tokens (my $suffix = '(){}[]';) to the end of the input
+string so Marpa can be told to search just that part of the string when the logic dictates that a
+Ruby Slippers token (bracket) is to be passed to Marpa to satisfy the grammar. It's put at the end
+so that it does not interfere with line and column counts in the original input string.
 
 =item o parmaterized.grammar.01.pl
 
