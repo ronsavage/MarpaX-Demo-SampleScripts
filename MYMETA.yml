@@ -16,7 +16,7 @@ name: MarpaX-Demo-SampleScripts
 provides:
   MarpaX::Demo::SampleScripts:
     file: lib/MarpaX/Demo/SampleScripts.pm
-    version: '1.00'
+    version: '1.01'
 requires:
   Capture::Tiny: '0.25'
   Data::Dumper: '2.145'
@@ -36,6 +36,6 @@ requires:
   utf8: '0'
   warnings: '0'
 resources:
-  license: http://opensource.org/licenses/artistic-license-2.0.php
+  license: http://www.perlfoundation.org/artistic_license_2_0
   repository: https://github.com/ronsavage/MarpaX-Demo-SampleScripts
-version: '1.00'
+version: '1.01'
