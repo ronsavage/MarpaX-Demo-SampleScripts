@@ -23,7 +23,7 @@ use Try::Tiny;
 
 use Types::Standard qw/Any ArrayRef HashRef Int Str/;
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
 # ------------------------------------------------
 
