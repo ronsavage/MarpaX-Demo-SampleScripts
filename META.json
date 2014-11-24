@@ -49,7 +49,7 @@
    "provides" : {
       "MarpaX::Demo::SampleScripts" : {
          "file" : "lib/MarpaX/Demo/SampleScripts.pm",
-         "version" : "1.01"
+         "version" : "1.02"
       }
    },
    "release_status" : "stable",
@@ -61,5 +61,5 @@
          "url" : "https://github.com/ronsavage/MarpaX-Demo-SampleScripts"
       }
    },
-   "version" : "1.01"
+   "version" : "1.02"
 }
