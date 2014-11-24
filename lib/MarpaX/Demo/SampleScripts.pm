@@ -176,6 +176,14 @@ Handle strings quoted with various characters, and with escaped characters in th
 
 =item o quoted.strings.04.pl
 
+Uses a grammar with pauses to handle various types of quoted strings, with manual scanning.
+
+See quoted.strings.05.pl for getting Marpa to handling the scanning of HTML.
+
+=item o quoted.strings.05.pl
+
+Handles HTML.
+
 =over 4
 
 =item o Handle strings containing escaped characters
@@ -233,6 +241,10 @@ refuses to fix.
 =back
 
 =head1 FAQ
+
+=head2 Do any scripts handle HTML?
+
+Yes. See scripts/quoted.strings.05.pl.
 
 =head1 Machine-Readable Change Log
 
