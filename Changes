@@ -1,5 +1,8 @@
 Revision history for Perl extension MarpaX::Demo::SampleScripts.
 
+1.02  Tue Nov 25 09:38:00 2014
+	- Add scripts/quoted.strings.05.pl for HTML.
+
 1.01  Fri Oct 31 11:26:00 2014
 	- Add scripts/match.parentheses.02.pl, which uses Ruby Slippers to provide missing brackets.
 	- Update pre-reqs to Marpa::R2 V 2.098000, as needed by the new script.
