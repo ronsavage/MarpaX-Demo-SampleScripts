@@ -91,6 +91,12 @@ for my $work
 	['OK', q|<<table><tr><td>html-style label with &lt;&gt; embedded angle brackets</td></tr></table>>|],
 	['OK', q|<<table border='0'><tr><td>html-style label with literal &lt;br /&gt; and no table border</td></tr></table>>|],
 	['OK', q|<<table border='0'><tr><td>html-style label with 2 <br align='center' /> &lt;br /&gt;s in the middle <br align='center' /> and without a table border.</td></tr></table>>|],
+	['OK', q|<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+	<TR><TD>"ZapfChancery-MediumItalic"</TD></TR>
+	<TR><TD>"ABCDEFGHIJLKLMNOPQRSTUVWXYZ"</TD></TR>
+	<TR><TD>"abcdefghijlklmnopqrstuvwxyz"</TD></TR>
+	<TR><TD>"ABCDEFGHIJLKLMNOPQRSTUVWXYZ\nabcdefghijlklmnopqrstuvwxyz"</TD></TR>
+	</TABLE>>|],
 )
 {
 	$count{in}++;
