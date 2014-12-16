@@ -40,5 +40,5 @@ print '-' x 50, "\n";
 print "$dialect: \n";
 print '-' x 50, "\n";
 print $converter -> html2wiki(html => $original_html), "\n";
-print '-' x 50;
+print '-' x 50, "\n";
 
