@@ -62,9 +62,9 @@ q{
 
 	lexeme default	= latm => 1
 
-	S				::= '<' quoted '>'
+	string			::= '<' quoted '>'
 	quoted			::= item | quoted item
-	item			::= S | unquoted
+	item			::= string | unquoted
 
 	unquoted		~ [^<>]+ # <>.
 
@@ -108,7 +108,8 @@ for my $work
 
 	$parser = Marpa::R2::Scanless::R->new
 	({
-		grammar         => $g,
+		grammar          => $g,
+		ranking_method   => 'high_rule_only',
 		#trace_terminals => 99,
 	});
 
