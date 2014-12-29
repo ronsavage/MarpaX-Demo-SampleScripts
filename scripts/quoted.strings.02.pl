@@ -64,7 +64,7 @@ q{
 	quoted			::= item | quoted item
 	item			::= S | unquoted
 
-	unquoted		~ [^"]+ # "
+	unquoted		~ [^"]+		# Add " for syntax highlight correction.
 
 	:discard		~ whitespace
 	whitespace		~ [\s+]
@@ -83,6 +83,7 @@ for my $work
 	['OK', '"these are "words in typewriter double quotes" and then some"'],
 	['OK', '"these are "words in "nested typewriter double" quotes" and then some"'],
 	['OK', '"these are "words in "nested "and even more nested" typewriter double" quotes" and then some"'],
+	['OK', '""'],
 )
 {
 	$count{in}++;

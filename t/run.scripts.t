@@ -31,11 +31,16 @@ sub run_one
 
 # ------------------------------------------------
 
+my($count)    = 0;
 my($dir_name) = './scripts';
 
 for my $script (read_dir($dir_name) )
 {
+	$count++;
+
 	run_one("$dir_name/$script");
 }
 
-done_testing;
+print "# Internal test count: $count\n";
+
+done_testing($count);
