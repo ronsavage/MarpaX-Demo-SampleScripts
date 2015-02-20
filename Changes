@@ -1,5 +1,8 @@
 Revision history for Perl extension MarpaX::Demo::SampleScripts.
 
+1.03  Wed Feb 18 16:32:00 2015
+	- Add examples/config.file.01.pl.
+
 1.02  Tue Nov 25 09:38:00 2014
 	- Add scripts/quoted.strings.05.pl for HTML.
 
