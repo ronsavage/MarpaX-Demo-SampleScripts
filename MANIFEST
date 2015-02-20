@@ -4,6 +4,7 @@ Changelog.ini
 Changes
 examples/ambiguous.grammar.01.pl
 examples/ambiguous.grammar.02.pl
+examples/config.file.01.pl
 examples/html.01.pl
 examples/match.keywords.01.pl
 lib/MarpaX/Demo/SampleScripts.pm
