@@ -3,6 +3,8 @@ use warnings;
 
 use Module::Build;
 
+# ----------------
+
 my $class = Module::Build->subclass(code => <<'EOF');
 
 sub ACTION_authortest
@@ -30,43 +32,43 @@ $class -> new
 	dist_author    => 'Ron Savage <ron@savage.net.au>',
 	build_requires =>
 	{
-		'Test::More' => 0.94,
-#		'Test::Pod'  => 1.45, # Make it optional. See xt/author/pod.t.
+		'Test::More' => 1.001014,
+		'Test::Pod' => 1.48,
 	},
 	configure_requires =>
 	{
-		'Module::Build' => 0.3800,
+		'Module::Build' => 0.4211,
 	},
 	meta_merge =>
 	{
 		resources =>
 		{
-			repository => 'https://github.com/ronsavage/MarpaX-Demo-SampleScripts',
+		'repository' => 'https://github.com/ronsavage/MarpaX-Demo-SampleScripts',
 		},
 	},
 	requires =>
 	{
-		'Capture::Tiny'   => 0.25,
-		'charnames'       => 0,
-		'Data::Dumper'    => 2.145,
-		'Data::Section'   => 0.200006,
-		'diagnostics'     => 0,
-		'File::Slurp'     => 9999.19,
-		'Marpa::R2'       => 2.098000,
+		'Capture::Tiny' => 0.25,
+		'charnames' => 0,
+		'Data::Dumper' => 2.145,
+		'Data::Section' => 0.200006,
+		'diagnostics' => 0,
+		'File::Slurp' => 9999.19,
+		'Marpa::R2' => 2.098000,
 		'Marpa::R2::HTML' => 2.098000,
-		'Moo'             => 1.006001,
-		'open'            => 0,
-		'perl'            => 5.010,
-		'POSIX'           => 1.32,
-		'strict'          => 0,
-		'Try::Tiny'       => 0.22,
+		'Moo' => 1.006001,
+		'open' => 0,
+		'perl' => 5.010,
+		'POSIX' => 1.32,
+		'strict' => 0,
+		'Try::Tiny' => 0.22,
 		'Types::Standard' => 1.000004,
-		'utf8'            => 0,
-		'warnings'        => 0,
+		'utf8' => 0,
+		'warnings' => 0,
 	},
 	resources =>
 	{
-		bugtracker => 'https://rt.cpan.org/Public/Dist/Display.html?Name=MarpaX-Demo-SampleScripts',
-		license    => 'http://opensource.org/licenses/Artistic-2.0',
+		'bugtracker' => 'https://rt.cpan.org/Public/Dist/Display.html?Name=MarpaX-Demo-SampleScripts',
+		'license' => 'http://opensource.org/licenses/Artistic-2.0',
 	},
 ) -> create_build_script();
