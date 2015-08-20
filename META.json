@@ -16,12 +16,13 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::More" : "0.94"
+            "Test::More" : "1.001014",
+            "Test::Pod" : "1.48"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "Module::Build" : "0.4211"
          }
       },
       "runtime" : {
@@ -49,7 +50,7 @@
    "provides" : {
       "MarpaX::Demo::SampleScripts" : {
          "file" : "lib/MarpaX/Demo/SampleScripts.pm",
-         "version" : "1.03"
+         "version" : "1.04"
       }
    },
    "release_status" : "stable",
@@ -61,5 +62,5 @@
          "url" : "https://github.com/ronsavage/MarpaX-Demo-SampleScripts"
       }
    },
-   "version" : "1.03"
+   "version" : "1.04"
 }
