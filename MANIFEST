@@ -2,9 +2,11 @@
 Build.PL
 Changelog.ini
 Changes
+examples/action.parse.pl
 examples/ambiguous.grammar.01.pl
 examples/ambiguous.grammar.02.pl
 examples/config.file.01.pl
+examples/heredoc.pl
 examples/html.01.pl
 examples/match.keywords.01.pl
 lib/MarpaX/Demo/SampleScripts.pm
