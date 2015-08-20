@@ -116,6 +116,11 @@ All these scripts are in the scripts/ directory.
 
 =over 4
 
+=item o action.parse.pl
+
+Show how, during an action sub, another parse can be done using the output of the parse which
+triggered the action. The inner parse uses the same grammar as the outer parse.
+
 =item o ambiguous.grammar.03.pl
 
 A grammar for the
@@ -124,6 +129,10 @@ L<Velocity|http://velocity.apache.org/engine/releases/velocity-1.4/specification
 =item o grammar.inspector.01.pl
 
 Display Marpa's view of the structure of a grammar.
+
+=item o heredoc.pl
+
+Parse multiple heredocs.
 
 =item o html.02.pl
 
@@ -222,20 +231,11 @@ All these scripts are in the examples/ directory.
 
 =over 4
 
-=item o action.parse.pl
-
-Show how, during an action sub, another parse can be done using the output of the parse which
-triggered the action. The inner parse uses the same grammar as the outer parse.
-
 =item o ambiguous.grammar.01.pl
 
 Contains both ambiguous and un-ambiguous grammars.
 
 Uses MarpaX::ASF::PFG, which is not on MetaCPAN.
-
-=item o heredoc.pl
-
-Parse multiple heredocs.
 
 =item o html.01.pl
 
@@ -245,7 +245,6 @@ Uses L<HTML::WikiConverter>, which won't install without patches, and which the 
 refuses to fix.
 
 =item o match.keywords.pl
-
 
 =back
 
