@@ -2,6 +2,7 @@ Revision history for Perl extension MarpaX::Demo::SampleScripts.
 
 1.04  Thu Aug 20 12:57:00 2015
 	- Add examples/action.parse.pl and examples/heredoc.pl. See docs for details.
+	- Remove Build.PL.
 
 1.03  Wed Feb 18 16:32:00 2015
 	- Add examples/config.file.01.pl.
